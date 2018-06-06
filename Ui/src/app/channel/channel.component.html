@@ -1,0 +1,61 @@
+
+
+
+
+<mat-drawer-container class="container" autosize >
+
+            <div class="row " >
+
+              <div class="col s6"  *ngFor="let content of channels">
+
+                <div class="card">
+                  <div class="card-content">
+                    <a href="#" [routerLink]="['/home/'+content.channelId+'/content']"  >{{content.title}}</a>
+
+                    <!--<img width="400" height="200" src={{content.imageUrl}} />-->
+
+                    <!--<img width="400" height="200" src="{{content.imageUr}}">-->
+
+
+                    <!--<iframe width="400" height="200"-->
+                            <!--src="{{content.imageUrl}}"-->
+                            <!--frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+
+                    <!--<button mat-icon-button class="circular-btn" >Manage user-->
+
+                    <!--</button>-->
+
+                    <!--<button mat-icon-button class="circular-btn" >Manage channel-->
+
+                    <!--</button>-->
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="col s6"  >
+
+                <div class="card">
+                  <div class="card-content">
+
+
+                  </div>
+                </div>
+
+              </div>
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+</mat-drawer-container>
