@@ -9,7 +9,6 @@ export class ChannelService {
   constructor(private http: HttpClient){}
 
   getChannelByUserId(id){
-console.log("find all by id ---",id);
 return this.http.get(this.rootUrl+"/channelService/v2/channel/findByCreator/"+id);
   }
 }

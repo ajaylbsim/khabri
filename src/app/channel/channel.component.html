@@ -13,46 +13,47 @@
 
             <div class="row " >
 
-              <div class="col s6"  *ngFor="let content of channels">
+              <div class="col s4"  *ngFor="let content of channels">
 
                 <div class="card">
-                  <div class="card-content">
+                  <div class="card-content  blue-text pointer" (click) ="move(content.channelId,content.title)" >
                     <!--<a href="#"  onclick="move(content)" [routerLink]="['/home/'+content.channelId+'/content']"   [queryParams]="{'title':content.title,'skipLocationChange':true }" >{{content.title}}</a>-->
 
-                    <a class="pointer" (click) ="move(content.channelId,content.title)" >{{content.title}}</a>
-
-                    <!--<img width="400" height="200" src={{content.imageUrl}} />-->
-
-                    <!--<img width="400" height="200" src="{{content.imageUr}}">-->
+                    <!--<a class="pointer" (click) ="move(content.channelId,content.title)" >{{content.title}}</a>-->
 
 
-                    <!--<iframe width="400" height="200"-->
-                            <!--src="{{content.imageUrl}}"-->
-                            <!--frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+                        <!--<a class="pointer" (click) ="move(content.channelId,content.title)"  > {{content.title | limitTo:50}}</a>-->
+                        <p> {{content.title | limitTo:50}}</p>
 
-                    <!--<button mat-icon-button class="circular-btn" >Manage user-->
-
-                    <!--</button>-->
-
-                    <!--<button mat-icon-button class="circular-btn" >Manage channel-->
-
-                    <!--</button>-->
-                  </div>
-                </div>
-
-              </div>
+                        <img    width="200px" height="150px" src="{{content.imageUrl}}">
 
 
-              <div class="col s6"  >
+                      </div>
+                      <div class="card-action">
 
-                <div class="card">
-                  <div class="card-content">
+                        <a class="pointer"><i class="material-icons" style="color:gray">delete</i></a>
+
+
+                        <a class="pointer" ><i class="material-icons" style="color:gray">edit</i></a>
+
 
 
                   </div>
                 </div>
 
               </div>
+
+
+              <!--<div class="col s6"  >-->
+
+                <!--<div class="card">-->
+                  <!--<div class="card-content">-->
+
+
+                  <!--</div>-->
+                <!--</div>-->
+
+              <!--</div>-->
 
 
 

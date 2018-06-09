@@ -9,8 +9,6 @@ export class ContentService {
   constructor(private http: HttpClient){}
 
   getContentBychannelId(id){
-    console.log("find all content by chaneel  id ---",id);
-
     return this.http.get(this.rootUrl+"/channelService/v2/channel/"+id+"/getAllContentForAdmin");
   }
 }

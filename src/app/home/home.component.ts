@@ -36,11 +36,11 @@ export class HomeComponent implements OnInit {
     console.log("this.route.data",this.route.data);
 
     this.route.data.subscribe(successData=>{
-      console.log('user found is ',successData);
+      // console.log('user found is ',successData);
       this.userClaims = successData.user;
     },
     error =>{
-      console.log("error in fetching user",error);
+      // console.log("error in fetching user",error);
 
     }
     )
