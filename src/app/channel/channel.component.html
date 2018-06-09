@@ -1,5 +1,12 @@
 
 
+<div class="nav-wrapper">
+  <div class="col s12" >
+    <a href="/home/channel" class="breadcrumb blue-text">channel</a>
+    <a  role="button" class="breadcrumb blue-text"> </a>
+
+  </div>
+</div>
 
 
 <mat-drawer-container class="container" autosize >
@@ -10,7 +17,9 @@
 
                 <div class="card">
                   <div class="card-content">
-                    <a href="#" [routerLink]="['/home/'+content.channelId+'/content']"  >{{content.title}}</a>
+                    <!--<a href="#"  onclick="move(content)" [routerLink]="['/home/'+content.channelId+'/content']"   [queryParams]="{'title':content.title,'skipLocationChange':true }" >{{content.title}}</a>-->
+
+                    <a class="pointer" (click) ="move(content.channelId,content.title)" >{{content.title}}</a>
 
                     <!--<img width="400" height="200" src={{content.imageUrl}} />-->
 

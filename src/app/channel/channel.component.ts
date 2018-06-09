@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ChannelService} from "../shared/channel.service";
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 
 
 
@@ -10,7 +11,7 @@ import {ChannelService} from "../shared/channel.service";
 })
 
 export  class ChannelComponent implements OnInit {
-  constructor(private channelService:ChannelService){}
+  constructor(private channelService:ChannelService,private router: Router){}
   channels = [];
   ngOnInit(){
 
@@ -23,6 +24,18 @@ export  class ChannelComponent implements OnInit {
 
 
     });
+
+
+  }
+
+  move(id,title){
+    console.log(id,title);
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+  'title':title}
+    };
+
+    this.router.navigate(['/home/'+id+'/content'],navigationExtras);
 
   }
 

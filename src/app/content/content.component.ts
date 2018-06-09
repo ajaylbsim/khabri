@@ -9,6 +9,8 @@ import {ContentService} from "../shared/content.service";
 })
 export class ContentComponent implements OnInit {
   contents =[];
+   id=0;
+   title:"";
   content={
     title:'test!'
   }
@@ -18,13 +20,25 @@ export class ContentComponent implements OnInit {
 
     console.log(  this.route.params['_value'].id)
 
+this.id = this.route.params['_value'].id;
+
+    // console.log(  this.route.params);
+
+    this.route.queryParams.subscribe(params=>{
+      this.title = params.title;
+    })
+
+
+
+
+
 
 
     this.contentService.getContentBychannelId(this.route.params['_value'].id).subscribe( successData =>{
 
       for (let successDataKey in successData) {
         this.contents.push(successData[successDataKey]);
-        console.log(successData[successDataKey]);
+        //console.log(successData[successDataKey]);
       }
 
 

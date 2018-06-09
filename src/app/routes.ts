@@ -12,7 +12,7 @@ export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent,canActivate:[AuthGuard],resolve:{user:UserResolve},
     children : [
       { path: 'channel', component: ChannelComponent },
-      { path: ':id/content', component: ContentComponent }
+      { path: ':id/content', component: ContentComponent}
 
     ]
     },

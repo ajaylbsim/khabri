@@ -149,6 +149,25 @@ div.error-message i{
 
 
 
+.cls
+
+
+.breadcrumb1:before {
+  content: '\E5CC';
+  color: blue !important;
+  vertical-align: top;
+  display: inline-block;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 25px;
+  margin: 0 10px 0 8px;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+
+
 
 
 
