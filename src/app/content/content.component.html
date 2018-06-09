@@ -1,0 +1,153 @@
+
+<!--<div class="col s6  m12">-->
+  <div class="row " style="margin-top: 20px">
+
+    <div class="col s1">
+      <div class="card">
+
+      </div>
+    </div>
+
+
+    <div class="col s10">
+
+      <div class="row" >
+
+
+
+        <div class="col s4">
+          <div class="card">
+            <div class="card-content khabri_tab khabri_tab_1">
+              <!--<h5 class="md-display-3"> <a href="#">35 Live </a></h5>-->
+              <span class=" center ">25 Edited</span>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col s4">
+          <div class="card">
+            <div class="card-content khabri_tab khabri_tab_2 ">
+              <!--<h5 class="md-display-3"> <a href="#"> Analytics </a></h5>-->
+              <span class=" center"> 35 Live </span>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col s4">
+          <div class="card khabri_tab khabri_tab_3">
+            <div class="card-content center ">
+              <!--<h5 class="md-display-3"> <a href="#"> Analytics </a></h5>-->
+              <span class="card-title center">Analytics</span>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+
+    <div class="col s1 ">
+      <div class="card">
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+
+      <div class="row " >
+
+        <div class="col s12">
+
+          <div class="row" >
+            <div class="col s2  ">
+
+
+                  <!--<h5 class="md-display-3"> <a href="#"> Analytics </a></h5>-->
+                  <!--<span class="card-title center">Analytics</span>-->
+
+            </div>
+
+          <div class="col s3  ">
+            <input type="text"  #Search [(ngModel)]="searchText"  name="Search" placeholder="Search content" >
+
+          </div>
+
+
+          <div class="col s6 ">
+
+            <mat-form-field>
+              <mat-select placeholder="Select status">
+                <mat-option *ngFor="let status of ['A','B','C']" [value]="status">
+                  {{ status }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+
+          <div class="col s1  ">
+
+
+            <a class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">add</i></a>
+
+
+          </div>
+
+        </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <div class="row" *ngIf="contents.length>0"  >
+
+          <div  class="col s4 "  *ngFor="let content of contents | filter : searchText:'title'" >
+
+
+            <div class="card white darken-1"  style="margin-top: 20px">
+            <div class="card-content blue-text" >
+                  <p> {{content.title | limitTo:50}}</p>
+
+                  <img    width="200px" height="150px" src="{{content.imageUrl}}">
+
+
+              </div>
+            <div class="card-action">
+              <audio controls>
+              <source src="{{content.audioUrl}}" type="audio/jpg">
+              <source src="{{content.audioUrl}}" type="audio/mp3">
+              Your browser does not support the audio element.
+              </audio>
+
+
+            </div>
+
+
+          </div>
+        </div>
+
+
+
+    </div>
+
+
+      </div>

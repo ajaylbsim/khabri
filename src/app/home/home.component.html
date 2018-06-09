@@ -1,0 +1,159 @@
+
+
+
+<nav class="cloura">
+  <div class="nav-wrapper" >
+
+    <!--mat-button (click)="drawer.toggle()"-->
+    <a  class="brand-logo left  "   >
+      <i class=" pointer material-icons" *ngIf="!drawer.opened" mat-button (click)="drawer.open()">menu</i>
+      <i class=" pointer material-icons" *ngIf="drawer.opened" mat-button (click)="drawer.close()">close</i>
+
+    </a>
+    <div class="row">
+
+
+      <a href="#" class="brand-logo center">
+        <img  height="60" src="../assets/khabri.jpg">
+      </a>
+
+
+      <div class="row right ">
+        <div class="col s2 ">
+          <i class="material-icons">notifications_active</i>
+        </div>
+
+
+
+        <div class="col s2">
+          <i class="material-icons">account_circle</i>
+        </div>
+
+
+        <div class="col s8  ">
+          <mat-label class="text_design" >{{userClaims.name}} </mat-label>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+
+<mat-drawer-container class="example-container" autosize  >
+
+
+
+
+  <mat-drawer #drawer class="example-sidenav side-nav-style" mode="side">
+    <!--<p>Auto-resizing sidenav</p>-->
+    <!--<p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>-->
+    <!--<button (click)="showFiller = !showFiller" mat-raised-button>-->
+      <!--Toggle extra text-->
+    <!--</button>-->
+    <div class="row  ">
+      <div class=" col s12 ">
+        <mat-list >
+          <mat-list-item  class="marin-top">Tech support (Live chat)</mat-list-item>
+          <mat-divider></mat-divider>
+
+
+
+          <mat-list-item class="marin-top">Request A Feature</mat-list-item>
+          <mat-divider ></mat-divider>
+          <mat-list-item class="marin-top">Recommend A creator</mat-list-item>
+
+        </mat-list>
+
+      </div>
+      <div class="col s12 ">
+
+        <!--<ul class="tabs">-->
+          <!--<li class="tab col s3"><a href="#test1">Test 1</a></li>-->
+          <!--<li class="tab col s3"><a class="active" href="#test2">Test 2</a></li>-->
+          <!--<li class="tab col s3 disabled"><a href="#test3">Disabled Tab</a></li>-->
+          <!--<li class="tab col s3"><a href="#test4">Test 4</a></li>-->
+        <!--</ul>-->
+      </div>
+
+
+
+
+    </div>
+
+
+
+
+  </mat-drawer>
+
+  <div class="example-sidenav-content"  mat-button (click)="drawer.close()">
+
+    <router-outlet></router-outlet>
+
+
+  </div>
+
+
+
+
+
+
+</mat-drawer-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<mat-drawer-container class="example-container" autosize >-->
+
+  <!--<div class="example-sidenav-content-left" >-->
+    <!--<nav class="cloura">-->
+      <!--<div class="nav-wrapper">-->
+
+        <!--<a href="" class="brand-logo left layout-margin " >-->
+          <!--<i class="material-icons">menu</i></a>-->
+
+        <!--<a href="#" class="brand-logo center">-->
+          <!--<img  height="60" src="../assets/khabri.jpg">-->
+        <!--</a>-->
+
+
+        <!--<div class="row right ">-->
+          <!--<div class="col s2 ">-->
+            <!--<i class="material-icons">notifications_active</i>-->
+          <!--</div>-->
+
+
+
+          <!--<div class="col s2">-->
+            <!--<i class="material-icons">account_circle</i>-->
+          <!--</div>-->
+
+
+          <!--<div class="col s8  ">-->
+            <!--<mat-label class="text_design" >{{userClaims.name}} </mat-label>-->
+          <!--</div>-->
+
+        <!--</div>-->
+
+      <!--</div>-->
+    <!--</nav>-->
+
+  <!--</div>-->
+
+   <!--<router-outlet></router-outlet>-->
+
+<!--</mat-drawer-container>-->
