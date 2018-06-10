@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -60,7 +61,8 @@ import { TruncatePipe } from './limitToPipe';
     MatCardModule,
     MatSelectModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatIconModule
   ],
   providers: [UserService,ChannelService,ContentService,AuthGuard,
     {

@@ -141,12 +141,20 @@
 
 
               </div>
-            <div class="card-action">
-              <audio controls>
-              <source src="{{content.audioUrl}}" type="audio/jpg">
-              <source src="{{content.audioUrl}}" type="audio/mp3">
-              Your browser does not support the audio element.
-              </audio>
+            <div class="card-action"   (click)="play(content.audioUrl,content.contentId)"   >
+              <!--<audio     #audioPlayer>-->
+              <!--<source src="{{content.audioUrl}}" type="audio/jpg">-->
+              <!--<source src="{{content.audioUrl}}" type="audio/mp3">-->
+              <!--Your browser does not support the audio element.-->
+              <!--</audio>-->
+              <mat-icon class=" small material-icons"  *ngIf="content.audioUrl && currntPlayerId !=content.contentId" > play_circle_outline</mat-icon>
+
+              <mat-icon class=" small material-icons" *ngIf="!audio.paused && currntPlayerId ==content.contentId" > pause_circle_outline</mat-icon>
+
+              <a class="disabled"> <mat-icon class=" small material-icons disabled grey-text" *ngIf="!content.audioUrl" > volume_off</mat-icon> </a>
+
+
+
 
 
             </div>
