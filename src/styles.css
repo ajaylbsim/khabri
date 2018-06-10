@@ -50,8 +50,8 @@ div.error-message i{
 
 .circular-btn{
   border-radius: 39px;
-  width: 38%;
-  height: 55px;
+  width: 100%;
+  background-color: #84bf40;
 }
 
 
@@ -165,6 +165,13 @@ div.error-message i{
   -webkit-font-smoothing: antialiased;
 }
 
+
+.khabri_tab_admin{
+ color: white;
+  font-size: 1.5em;
+  padding: 15px!important;
+
+}
 
 
 
