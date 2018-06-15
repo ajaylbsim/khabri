@@ -50,18 +50,23 @@ this.id = this.route.params['_value'].id;
   }
 
   play(url:string,id:any){
-    console.log(url);
+    console.log(url+this.audio.paused);
 
     //  this.audio = new Audio();
-    this.audio.src = url;
     // this.audio.play();
     if (this.audio.paused) {
-      console.log(id);
+      console.log("-========"+id);
+      this.audio.src = url;
       this.audio.play();
       this.currntPlayerId = id;
     } else {
+      // this.audio.src = url;
+      console.log("--"+this.currntPlayerId);
+
+      this.currntPlayerId = 909999;
       this.audio.pause();
-      this.currntPlayerId = -9;
+      //this.audio.paused=false;
+      console.log("--"+this.currntPlayerId);
     }
   }
 

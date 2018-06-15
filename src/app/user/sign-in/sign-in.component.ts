@@ -21,21 +21,25 @@ export class SignInComponent implements OnInit {
 
   OnSubmit(userName, password) {
     console.log("user name = " + userName + " password = " + password);
-    if (password == "123") {
-      localStorage.setItem("userToken", password);
-      this.toastr.clear(this.toast.toastId);
-      this.toast = this.toastr.success('Welcome to khabri !');
-      this.router.navigate(['/home/channel']);
-    }
+    // if (password == "123") {
+    //   localStorage.setItem("userToken", password);
+    //   this.toastr.clear(this.toast.toastId);
+    //   this.toast = this.toastr.success('Welcome to khabri !');
+    //   this.router.navigate(['/home/channel']);
+    // }
 
 
-    //    this.userService.userAuthentication(userName,password).subscribe((data : any)=>{
-    //     localStorage.setItem('userToken',data.access_token);
-    //     this.router.navigate(['/home']);
-    //   },
-    //   (err : HttpErrorResponse)=>{
-    //     this.isLoginError = true;
-    //   });
+       this.userService.userAuthentication(userName,password).subscribe((data : any)=>{
+        console.log("data is ",data);
+        //localStorage.setItem('userToken',data.access_token);
+           // localStorage.setItem("userToken", password);
+           this.toastr.clear(this.toast.toastId);
+           this.toast = this.toastr.success('Welcome to khabri !');
+           this.router.navigate(['/home/channel']);
+      },
+      (err: HttpErrorResponse)=>{
+        this.isLoginError = true;
+      });
 
   }
 }

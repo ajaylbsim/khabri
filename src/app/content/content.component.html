@@ -80,43 +80,47 @@
 
         <div class="col s12">
 
-          <div class="row" >
-            <div class="col s2  ">
+            <div class="row" >
+              <div class="col s2  ">
 
 
-                  <!--<h5 class="md-display-3"> <a href="#"> Analytics </a></h5>-->
-                  <!--<span class="card-title center">Analytics</span>-->
+                    <!--<h5 class="md-display-3"> <a href="#"> Analytics </a></h5>-->
+                    <!--<span class="card-title center">Analytics</span>-->
+
+              </div>
+
+            <div class="col s3  ">
+              <input type="text"  #Search [(ngModel)]="searchText"  name="Search" placeholder="Search content" >
 
             </div>
 
-          <div class="col s3  ">
-            <input type="text"  #Search [(ngModel)]="searchText"  name="Search" placeholder="Search content" >
+
+            <div class="col s6 ">
+
+              <mat-form-field>
+                <mat-select placeholder="Select status">
+                  <mat-option *ngFor="let status of ['A','B','C']" [value]="status">
+                    {{ status }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+
+
+
+
+            </div>
+
+            <div class="col s1  ">
+
+
+              <a class="btn-floating btn-large waves-effect waves-light blue pulse"><i class="material-icons">add</i></a>
+
+
+            </div>
 
           </div>
-
-
-          <div class="col s6 ">
-
-            <mat-form-field>
-              <mat-select placeholder="Select status">
-                <mat-option *ngFor="let status of ['A','B','C']" [value]="status">
-                  {{ status }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-
-          </div>
-
-          <div class="col s1  ">
-
-
-            <a class="btn-floating btn-large waves-effect waves-light blue pulse"><i class="material-icons">add</i></a>
-
-
-          </div>
-
-        </div>
-
         </div>
 
 
@@ -141,15 +145,15 @@
 
 
               </div>
-            <div class="card-action"   (click)="play(content.audioUrl,content.contentId)"   >
+            <div class="card-action "   (click)="play(content.audioUrl,content.contentId)"   >
               <!--<audio     #audioPlayer>-->
               <!--<source src="{{content.audioUrl}}" type="audio/jpg">-->
               <!--<source src="{{content.audioUrl}}" type="audio/mp3">-->
               <!--Your browser does not support the audio element.-->
               <!--</audio>-->
-              <mat-icon class=" small material-icons"  *ngIf="content.audioUrl && currntPlayerId !=content.contentId" > play_circle_outline</mat-icon>
+              <mat-icon class=" small material-icons pointer"  *ngIf="content.audioUrl && currntPlayerId !=content.contentId" > play_circle_outline</mat-icon>
 
-              <mat-icon class=" small material-icons" *ngIf="!audio.paused && currntPlayerId ==content.contentId" > pause_circle_outline</mat-icon>
+              <mat-icon class=" small material-icons pointer" *ngIf="!audio.paused && currntPlayerId ==content.contentId" > pause_circle_outline</mat-icon>
 
               <a class="disabled"> <mat-icon class=" small material-icons disabled grey-text" *ngIf="!content.audioUrl" > volume_off</mat-icon> </a>
 
