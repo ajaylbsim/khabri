@@ -15,22 +15,8 @@
   <!--admin view start-->
 
   <div class="row " >
-
-    <!--<div class="col s1">-->
-      <!--<div class="card">-->
-
-      <!--</div>-->
-    <!--</div>-->
-
-
     <div class="col s12">
-
       <div class="row" >
-
-
-
-
-
         <div class="col s3">
           <div class="card circular-btn pointer">
             <div class="card-content center khabri_tab_admin " >
@@ -63,29 +49,59 @@
           </div>
         </div>
 
-
-
-
-
-
-
       </div>
 
-
     </div>
-
-
-
-    <!--<div class="col s1 ">-->
-      <!--<div class="card">-->
-
-      <!--</div>-->
-    <!--</div>-->
-
 
   </div>
 
   <!--admin view ends-->
+
+
+  <!--search  view-->
+
+  <div class="row " >
+
+    <div class="col s12">
+
+      <div class="row" >
+        <div class="col s2  ">
+
+        </div>
+
+        <div class="col s3  ">
+          <input type="text"  #Search [(ngModel)]="searchText"  name="Search" placeholder="Search content" >
+
+        </div>
+
+
+        <div class="col s4 ">
+
+          <mat-form-field>
+            <mat-select placeholder="Select status">
+              <mat-option *ngFor="let status of statusList" [value]="status.statusId">
+                {{ status.statusName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+
+        </div>
+
+        <div class="col s3  ">
+
+
+          <a class="btn-floating btn-large waves-effect waves-light blue pulse"><i class="material-icons">add</i></a>
+
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <!--search  view end -->
 
 
 
@@ -94,16 +110,13 @@
 
   <div class="row " >
 
-              <div class="col s4"  *ngFor="let content of channels">
+              <div class="col s4"  *ngFor="let content of channels | filter : searchText:'title' :'channelId'">
 
                 <div class="card">
                   <div class="card-content  blue-text pointer" (click) ="move(content.channelId,content.title)" >
-                    <!--<a href="#"  onclick="move(content)" [routerLink]="['/home/'+content.channelId+'/content']"   [queryParams]="{'title':content.title,'skipLocationChange':true }" >{{content.title}}</a>-->
 
-                    <!--<a class="pointer" (click) ="move(content.channelId,content.title)" >{{content.title}}</a>-->
+                    <p> <span>#</span>{{content.channelId}}</p>
 
-
-                        <!--<a class="pointer" (click) ="move(content.channelId,content.title)"  > {{content.title | limitTo:50}}</a>-->
                         <p> {{content.title | limitTo:50}}</p>
 
                         <img    width="200px" height="150px" src="{{content.imageUrl}}">

@@ -8,6 +8,12 @@ import {ContentService} from "../shared/content.service";
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
+  statusList = [
+    {"statusId":3,"statusName":"EDITED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
+    {"statusId":5,"statusName":"REVIEWED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
+    // {"statusId":4,"statusName":"DELETED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"}
+  ];
+
   contents =[];
    id=0;
    title:"";
@@ -38,11 +44,18 @@ this.id = this.route.params['_value'].id;
 
 
     this.contentService.getContentBychannelId(this.route.params['_value'].id).subscribe( successData =>{
-
+let status = {}
       for (let successDataKey in successData) {
         this.contents.push(successData[successDataKey]);
-        //console.log(successData[successDataKey]);
+
+
+        //console.log(successData[successDataKey].statusName);
+        status[successData[successDataKey].status['statusName']] = successData[successDataKey].status;
       }
+
+      console.log(status);
+
+      console.log(JSON.stringify(status));
 
 
     });
@@ -50,7 +63,8 @@ this.id = this.route.params['_value'].id;
   }
 
   play(url:string,id:any){
-    console.log(url+this.audio.paused);
+    if(url == null) return;
+    //console.log(url+this.audio.paused);
 
     //  this.audio = new Audio();
     // this.audio.play();

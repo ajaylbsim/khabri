@@ -4,16 +4,36 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'filter'
 })
 
-export class FilterPipe implements PipeTransform {
-  transform(items: any[], searchText: string , keyName:string): any[] {
-    if(!items) return [];
-    if(!searchText) return items;
-    searchText = searchText.toLowerCase();
-    return items.filter( it => {
-       console.log(keyName);
-      console.log(it);
+// export class FilterPipe implements PipeTransform {
+//   transform(items: any[], searchText: string , keyName:string): any[] {
+//     if(!items) return [];
+//     if(!searchText) return items;
+//     searchText = searchText.toLowerCase();
+//     return items.filter( it => {
+//        console.log(keyName);
+//       console.log(it);
+//
+//       return it[keyName].toLowerCase().includes(searchText);
+//     });
+//   }
+// }
 
-      return it[keyName].toLowerCase().includes(searchText);
+
+
+
+export class FilterPipe implements PipeTransform {
+  transform(items: any[], searchText: string, keyName: string, ddd: string): any[] {
+    if (!items) return [];
+    if (!searchText) return items;
+
+    searchText = searchText.toLowerCase();
+    return items.filter(it => {
+      if (it[keyName].toLowerCase().includes(searchText)) {
+        return it[keyName].toLowerCase().includes(searchText);
+      } else {
+        return it[ddd].toString().toLowerCase().includes(searchText);
+
+      }
     });
   }
 }
