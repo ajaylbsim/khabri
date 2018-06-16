@@ -91,9 +91,9 @@ div.error-message i{
 
 
 
-/*.side-nav-style{*/
-  /*background-color: #6E6767;*/
-/*}*/
+.side-nav-style{
+  background-color: #6E6767;
+}
 
 .mat-list-item-content {
   color: #7d868d;

@@ -1,4 +1,7 @@
-<form class="col s12 white" #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
+
+
+
+<form class="col s12 white" #userRegistrationForm="ngForm" >
   <div class="row">
     <div class="input-field col s6">
       <input class="validate" type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" required>

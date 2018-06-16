@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ContentService} from "../shared/content.service";
 
 @Component({
@@ -23,7 +23,7 @@ export class ContentComponent implements OnInit {
   content={
     title:'test!'
   }
-  constructor(private route :ActivatedRoute,private contentService:ContentService) { }
+  constructor(private route :ActivatedRoute,private contentService:ContentService,private router: Router) { }
   ngOnInit() {
     this.audio = new Audio();
 
@@ -69,7 +69,7 @@ let status = {}
     //  this.audio = new Audio();
     // this.audio.play();
     if (this.audio.paused) {
-      console.log("-========"+id);
+      // console.log("-========"+id);
       this.audio.src = url;
       this.audio.play();
       this.currntPlayerId = id;
@@ -82,6 +82,15 @@ let status = {}
       //this.audio.paused=false;
       console.log("--"+this.currntPlayerId);
     }
+  }
+
+
+
+
+  addContent(id:string){
+
+   this.router.navigate(['/home/'+id+'/add-content']);
+
   }
 
 }
