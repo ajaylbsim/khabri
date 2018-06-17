@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 import {TagModel} from "ngx-chips/core/accessor";
+import {ContentService} from "../shared/content.service";
 
 @Component({
   selector: 'app-add-content',
@@ -11,7 +12,8 @@ export class AddContentComponent implements OnInit {
   user={};
   content={};
   fileProgressStatus = 0;
-  fileToUpload= {"name":""};
+  fileToUpload:File;
+  audioFileToUpload:File;
   statusList = [
     {"statusId":3,"statusName":"EDITED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
     {"statusId":5,"statusName":"REVIEWED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
@@ -19,32 +21,34 @@ export class AddContentComponent implements OnInit {
   ];
   itemsAsObjects = [{id: 0, name: 'Angular'}, {id: 1, name: 'React'}];
   locationsAsObjects=[];
+  imageprogress: {percentage: number} = {percentage: 0};
+  audioContent: {percentage: number} = {percentage: 0};
+  audio = new Audio();
 
-  constructor() { }
+  constructor(private contentService:ContentService) { }
   // fileToUpload: File = null;
 
   ngOnInit() {
-    this. fileToUpload= {"name":""};
+    // this. fileToUpload = new File();
     this.itemsAsObjects = [{id: 0, name: 'Angular'}, {id: 1, name: 'React'}];
     this.locationsAsObjects = [];
   }
 
 
   handleFileInput(files: FileList) {
-    let obj = Observable.interval(100).take(100).do(i => console.log("hello "+i));
     this.fileToUpload = files.item(0);
-    console.log("hello ",  this.fileToUpload);
-
-
-    let objhh =  obj.subscribe(i => {
-      this.fileProgressStatus = this.fileProgressStatus +10;
-
-      if( this.fileProgressStatus >100) objhh.unsubscribe();
-    }
-
-  );
-
+    this.contentService.pushImageToStorage(this.fileToUpload,this.imageprogress,false);
   }
+
+  handleAudioInput(files: FileList) {
+    this.audioFileToUpload = files.item(0);
+    console.log(">>>>>>>>>>> this.audioFileToUpload   ", this.audioFileToUpload );
+
+    this.contentService.pushImageToStorage(this.audioFileToUpload,this.audioContent,true);
+  }
+
+
+
   public options = {
     readonly: undefined,
     placeholder: '+ Tag'
@@ -76,15 +80,19 @@ export class AddContentComponent implements OnInit {
     console.log('input focused: current value is ' + item);
   }
 
-  // postFile(fileToUpload: File): Observable<boolean> {
-  //   const endpoint = 'your-destination-url';
-  //   const formData: FormData = new FormData();
-  //   formData.append('fileKey', fileToUpload, fileToUpload.name);
-  //   return this.httpClient
-  //     .post(endpoint, formData, { headers: yourHeadersConfig })
-  //     .map(() => { return true; })
-  //     .catch((e) => this.handleError(e));
-  // }
+
+  play(url:string){
+    console.log(">>>>>>>>>>>url>>>>",this.audioContent);
+    if(url == null) return;
+
+    if (this.audio.paused) {
+      this.audio.src = url;
+      this.audio.play();
+    } else {
+      this.audio.pause();
+      //this.audio.paused = false;
+    }
+  }
 
 
 }

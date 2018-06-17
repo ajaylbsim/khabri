@@ -59,9 +59,9 @@
 
                   <div class="col s6">
                     <mat-card-title> upload Audio</mat-card-title>
-                    <input type="file" (change)="handleFileInput($event.target.files)"
-                           placeholder="Upload file" accept=".pdf,.doc,.docx, .jpg">
-                    <mat-progress-bar mode="determinate" value="{{fileProgressStatus}}"></mat-progress-bar>
+                    <input type="file" (change)="handleAudioInput($event.target.files)"
+                           placeholder="Upload file" accept=".pdf,.doc,.docx, .mp3,.ogg">
+                    <mat-progress-bar mode="determinate" value="{{audioContent.percentage}}"></mat-progress-bar>
 
 
 
@@ -69,12 +69,12 @@
 
                       <div class="card-content blue-text center">
 
-                    <span class="pointer " (click)="play(content.audioUrl,content.contentId)" >
-                  <mat-icon class="large material-icons pointer"  > play_circle_outline</mat-icon>
+                    <span class="pointer " (click)="play(audioContent.audioUrl)" >
+                  <mat-icon class="large material-icons pointer" *ngIf="audioContent.audioUrl&&audio.paused"  > play_circle_outline</mat-icon>
 
-                  <mat-icon class=" small material-icons pointer"  > pause_circle_outline</mat-icon>
+                  <mat-icon class=" small material-icons pointer" *ngIf="!audio.paused" > pause_circle_outline</mat-icon>
 
-                  <a class="disabled"> <mat-icon class=" small material-icons disabled grey-text" > volume_off</mat-icon> </a>
+                  <a class="disabled"> <mat-icon class=" small material-icons disabled grey-text" *ngIf="!audioContent.audioUrl" > volume_off</mat-icon> </a>
 
                 </span>
 
@@ -87,8 +87,10 @@
                     <mat-card-title> upload Image</mat-card-title>
                     <input type="file"  (change)="handleFileInput($event.target.files)"
                            placeholder="Upload file" accept=".pdf,.doc,.docx, .jpg">
-                    <mat-progress-bar mode="determinate" value="{{fileProgressStatus}}"></mat-progress-bar>
-                    <img    width="200px" height="200Px" src="https://scontent.fdel1-3.fna.fbcdn.net/v/t1.0-9/14900469_984588194986766_3209390422372239427_n.jpg?_nc_cat=0&oh=1856bc8d93650e95bead0d7b0e647951&oe=5BBEF398">
+                    <mat-progress-bar mode="determinate" value="{{imageprogress.percentage}}"></mat-progress-bar>
+                    <!--<img    width="200px" height="200Px" src="https://scontent.fdel1-3.fna.fbcdn.net/v/t1.0-9/14900469_984588194986766_3209390422372239427_n.jpg?_nc_cat=0&oh=1856bc8d93650e95bead0d7b0e647951&oe=5BBEF398">-->
+                    <img    width="200px" height="200Px" src="{{imageprogress.imageUrl}}">
+
 
 
                   </div>
