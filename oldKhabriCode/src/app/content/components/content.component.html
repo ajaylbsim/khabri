@@ -1,0 +1,356 @@
+<!--- index.html -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+<h3>Manage Content</h3>
+
+<ng2-smart-table [settings]="settings" [source]="source" *ngIf = "source" (userRowSelect)="onUserRowSelect($event)"></ng2-smart-table>
+<div style="text-align:center">
+  <button type="button" (click)="addContent()" class="btn btn-primary">Add New Content</button>
+</div>
+
+
+
+
+<form [hidden]="!isSelectedContent" [formGroup]="contentForm" (ngSubmit)="onSubmit(contentForm)" novalidate>
+
+    <mat-grid-list cols="10" rowHeight="100px">
+        <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="1"
+            [style.background]="blue">
+        </mat-grid-tile>
+        <mat-grid-tile
+            [colspan]="2"
+            [rowspan]="1"
+            [style.background]="blue">
+            <div  class="form-group">
+                <label for="contentId">Content ID</label>
+                <input
+                    formControlName="contentId"
+                    [(ngModel)] = "selectedContent.contentId"
+                    readonly>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile
+        [colspan]="2"
+        [rowspan]="1"
+        [style.background]="lightblue">
+        <div  class="form-group">
+            <label for="source">Source</label>
+            <input
+                formControlName="source"
+                [(ngModel)] = "selectedContent.source"
+                readonly
+                >
+        </div>
+        </mat-grid-tile>
+        <mat-grid-tile
+        [colspan]="2"
+        [rowspan]="1"
+        [style.background]="blue">
+        <div  class="form-group">
+                <label for="priority">Priority</label>
+                <select class="form-control" formControlName="priority" [(ngModel)] = "selectedContent.priority">
+                        <option *ngFor="let priority of priorityList" [ngValue]="priority">{{priority}}</option>
+                </select>
+        </div>
+        </mat-grid-tile>
+        <mat-grid-tile
+        [colspan]="2"
+        [rowspan]="1"
+        [style.background]="blue">
+        <div  class="form-group">
+                <label for="channel">Channel</label>
+                <input
+                    formControlName="channel"
+                    [(ngModel)] = "selectedContent.channelName"
+                    readonly>
+        </div>
+        </mat-grid-tile>
+        <mat-grid-tile
+        [colspan]="1"
+        [rowspan]="1"
+        [style.background]="blue">
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="10" rowHeight="100px">
+            <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="1"
+            [style.background]="blue">
+            </mat-grid-tile>
+
+            <mat-grid-tile
+            [colspan]="8"
+            [rowspan]="1"
+            [style.background]="blue">
+            <mat-form-field class="full-width">
+                    <div  class="form-group">
+                            <label for="title">Title</label>
+                            <textarea
+                                matInput
+                                formControlName="title"
+                                [(ngModel)] = "selectedContent.title"
+                                class="form-control"></textarea>
+                        </div>
+            </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="1"
+            [style.background]="blue">
+            </mat-grid-tile>
+    </mat-grid-list>
+    
+    
+
+    <mat-grid-list cols="10" rows="2" rowHeight="100px">
+            <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="2"
+            [style.background]="blue">
+            </mat-grid-tile>
+
+            <mat-grid-tile
+            [colspan]="8"
+            [rowspan]="2"
+            [style.background]="blue">
+            <mat-form-field class="full-width">
+                    <div  class="form-group">
+                            <label for="description">Description</label>
+                            <textarea
+                                rows="6"
+                                matInput
+                                formControlName="description"
+                                [(ngModel)] = "selectedContent.description"
+                                class="form-control"></textarea>
+                        </div>
+            </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="2"
+            [style.background]="blue">
+            </mat-grid-tile>
+    </mat-grid-list>
+
+
+    <mat-grid-list cols="10" rows="2" rowHeight="100px">
+            <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="2"
+            [style.background]="blue">
+            </mat-grid-tile>
+            <mat-grid-tile
+            [colspan]="4"
+            [rowspan]="2"
+            [style.background]="blue">
+            <div  class="form-group half-width">
+                    <label for="imageUrl">Image URL</label>
+                    <input
+                        formControlName="imageUrl"
+                        class="form-control"
+                        [(ngModel)] = "selectedContent.imageUrl"
+                        >
+                    <div *ngIf="imageUploadProgress()" class="progress">
+                        <div class="progress-bar progress-bar-info progress-bar-striped"
+                          role="progressbar" attr.aria-valuenow="{{imageprogress.percentage}}"
+                          aria-valuemin="0" aria-valuemax="100"
+                          [ngStyle]="{width:imageprogress.percentage+'%'}">
+                          {{imageprogress.percentage}}%</div>
+                      </div>
+                       
+                      <label class="btn btn-default">
+                        <input type="file" (change)="selectImage($event)">
+                      </label> 
+                       
+                      <button type="button" class="btn btn-success" [disabled]="!isSelectedImage()"
+                        (click)="uploadImage()">Upload</button>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile
+            [colspan]="4"
+            [rowspan]="2"
+            [style.background]="blue">
+            
+            <div  class="form-group half-width">
+            <label>Audio URL</label>
+            <input 
+                formControlName="audioUrl"
+                class="form-control"
+                [(ngModel)] = "selectedContent.audioUrl"
+                readonly>
+    
+          <!-- <label>Upload Audio</label>
+          <input type="file" id="Audio" #contentAudio> -->
+    
+            <div *ngIf="audioUploadProgress()" class="progress">
+              <div class="progress-bar progress-bar-info progress-bar-striped"
+                role="progressbar" attr.aria-valuenow="{{audioprogress.percentage}}"
+                aria-valuemin="0" aria-valuemax="100"
+                [ngStyle]="{width:audioprogress.percentage+'%'}">
+                {{audioprogress.percentage}}%</div>
+            </div>
+             
+            <label class="btn btn-default">
+              <input type="file" (change)="selectAudio($event)">
+            </label>
+             
+            <button type="button" class="btn btn-success" [disabled]="!contentAudioFile"
+              (click)="uploadAudio()">Upload</button>
+        </div>
+            </mat-grid-tile>
+            <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="2"
+            [style.background]="blue">
+            </mat-grid-tile>
+
+    </mat-grid-list>
+
+    <mat-grid-list cols="10" rowHeight="100px">
+        <mat-grid-tile
+        [colspan]="1"
+        [rowspan]="1"
+        [style.background]="blue">
+        </mat-grid-tile>
+        <mat-grid-tile
+        [colspan]="8"
+        [rowspan]="1"
+        [style.background]="blue">
+        <div  class="form-group full-width">
+                <label for="sourceUrl">Full Story URL</label>
+                    <input
+                    formControlName="sourceUrl"
+                    [(ngModel)] = "selectedContent.sourceUrl"
+                    class="form-control"
+                    >
+            </div> 
+        </mat-grid-tile>
+        <mat-grid-tile
+        [colspan]="1"
+        [rowspan]="1"
+        [style.background]="blue">
+        </mat-grid-tile>
+
+    </mat-grid-list>     
+
+    <!-- <button type="button" (click)="addLocation()" class="btn btn-primary">Add Location</button>
+    <div formArrayName="contentLocationRelation" 
+      *ngFor="let location of contentForm.get('contentLocationRelation').controls; let i = index;">
+      <div [formGroupName]="i" class="form-group">
+        <div [formGroupName]="id" class="form-group" formControlName="id">
+            <div [formGroupName] = "content" class="form-group">
+                <div class="form-group">
+                <input formControlName="contentId" placeholder="Content id">
+                </div>
+            </div>
+            <div [formGroupName] = "location"  class="form-group">
+                <div class="form-group">
+                  <input formControlName="locationId" placeholder="Location id">
+                </div>
+            </div>
+            
+        </div>
+        <input formControlName="proximity" placeholder="Proximity">
+      </div>
+    </div> -->
+
+    <mat-grid-list cols="11" rowHeight="100px">
+            <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="1"
+            [style.background]="blue">
+            </mat-grid-tile>
+            <mat-grid-tile
+            [colspan]="3"
+            [rowspan]="1"
+            [style.background]="blue">
+            <button type="button" (click)="addLocation()" class="btn btn-primary">Add Location</button>
+            <div formArrayName="contentLocationRelation" 
+              *ngFor="let location of contentForm.get('contentLocationRelation').controls; let i = index;">
+              <label>Location:{{i+1}}</label>
+              <div [formGroupName]="i" class="form-group">
+                <select class="form-control" formControlName="locationId">
+                    <option *ngFor="let location of locations" [value]="location.locationId">{{location.name}}</option>
+                </select> 
+                <input formControlName="proximity" placeholder="Proximity">
+              </div>
+            </div>
+            </mat-grid-tile>
+            <mat-grid-tile
+            [colspan]="3"
+            [rowspan]="1"
+            [style.background]="blue">
+            <div formArrayName="tags" 
+            *ngFor="let tagValue of contentForm.get('tags').controls; let i = index;">
+            <label> Tag:{{i+1}}</label>
+            <div class="form-group" [formGroupName]="i">
+              <select class="form-control" formControlName="tagId">
+                  <option *ngFor="let tag of tags" [ngValue]="tag.tagId">{{tag.tagName}}</option>
+              </select> 
+            </div>
+          </div>
+            </mat-grid-tile>
+            <mat-grid-tile
+            [colspan]="3"
+            [rowspan]="1"
+            [style.background]="blue">
+            <div  class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" formControlName="status">
+                            <option *ngFor="let state of status" [ngValue]="state">{{state.statusName}}</option>
+                    </select>     
+                </div>
+
+            </mat-grid-tile>
+            <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="1"
+            [style.background]="blue">
+            </mat-grid-tile>
+
+    </mat-grid-list>
+
+    <mat-grid-list cols="10" rowHeight="100px">
+            <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="1"
+            [style.background]="blue">
+            </mat-grid-tile>
+
+            <mat-grid-tile
+            [colspan]="8"
+            [rowspan]="1"
+            [style.background]="blue">
+            <div style="margin-bottom: 1em">
+                    <button type="submit"
+                          [disabled]="!validateForm()" class="btn btn-success">Save</button> 
+                    
+                    <button type="button" (click)="cancel()"
+                          [disabled]="contentForm.pristine" class="btn btn-danger">Cancel</button>
+                    
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="1"
+            [style.background]="blue">
+            </mat-grid-tile>
+
+    </mat-grid-list>
+
+    
+
+    <!-- <button type="button" (click)="addTag()" class="btn btn-primary">Add Tag</button> -->
+    
+  </form>
+
+
+
+
+  
+

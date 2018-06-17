@@ -1,0 +1,11 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div class="container">
+    <h2>My Channels</h2>
+    <div class="list-group" *ngFor="let channel of channels">
+      <div class="list-group-item ">
+        <h4 class="list-group-item-heading">{{ channel.title }}</h4> <button (click)="selectChannel(channel)">Manage</button>
+      </div>
+    </div>
+  </div>
+
