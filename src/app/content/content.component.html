@@ -97,16 +97,13 @@
 
             <div class="col s6 ">
 
-              <mat-form-field>
-                <mat-select placeholder="Select status">
-                  <mat-option *ngFor="let status of ['A','B','C']" [value]="status">
-                    {{ status }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-
-
-
+                <mat-form-field>
+                  <mat-select placeholder="Select status">
+                    <mat-option *ngFor="let status of statusList" [value]="status.statusId">
+                      {{ status.statusName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
 
 
 
@@ -115,7 +112,7 @@
             <div class="col s1  ">
 
 
-              <a class="btn-floating btn-large waves-effect waves-light blue pulse"><i class="material-icons">add</i></a>
+              <a class="btn-floating btn-large waves-effect waves-light blue pulse" (click)="addContent(id)" ><i class="material-icons">add</i></a>
 
 
             </div>
@@ -134,37 +131,40 @@
 
         <div class="row" *ngIf="contents.length>0"  >
 
-          <div  class="col s4 "  *ngFor="let content of contents | filter : searchText:'title'" >
+          <div  class="col s4 "  *ngFor="let content of contents | filter : searchText:'title':'contentId'" >
 
 
             <div class="card white darken-1"  style="margin-top: 20px">
             <div class="card-content blue-text" >
-                  <p> {{content.title | limitTo:50}}</p>
+
+              <p> <span>#</span>{{content.contentId}}</p>
+
+              <p> {{content.title | limitTo:50}}</p>
 
                   <img    width="200px" height="150px" src="{{content.imageUrl}}">
 
 
               </div>
-            <div class="card-action "   (click)="play(content.audioUrl,content.contentId)"   >
-              <!--<audio     #audioPlayer>-->
-              <!--<source src="{{content.audioUrl}}" type="audio/jpg">-->
-              <!--<source src="{{content.audioUrl}}" type="audio/mp3">-->
-              <!--Your browser does not support the audio element.-->
-              <!--</audio>-->
-              <mat-icon class=" small material-icons pointer"  *ngIf="content.audioUrl && currntPlayerId !=content.contentId" > play_circle_outline</mat-icon>
+            <div class="card-action ">
+                <span class="pointer" (click)="play(content.audioUrl,content.contentId)" >
+                  <mat-icon class=" small material-icons pointer"  *ngIf="content.audioUrl && currntPlayerId !=content.contentId" > play_circle_outline</mat-icon>
 
-              <mat-icon class=" small material-icons pointer" *ngIf="!audio.paused && currntPlayerId ==content.contentId" > pause_circle_outline</mat-icon>
+                  <mat-icon class=" small material-icons pointer" *ngIf="!audio.paused && currntPlayerId ==content.contentId" > pause_circle_outline</mat-icon>
 
-              <a class="disabled"> <mat-icon class=" small material-icons disabled grey-text" *ngIf="!content.audioUrl" > volume_off</mat-icon> </a>
+                  <a class="disabled"> <mat-icon class=" small material-icons disabled grey-text" *ngIf="!content.audioUrl" > volume_off</mat-icon> </a>
 
+                </span>
 
+                  <a class="pointer"><i class="material-icons" style="color:gray">delete</i></a>
 
 
+                  <a class="pointer" ><i class="material-icons" style="color:gray">edit</i></a>
 
             </div>
 
 
-          </div>
+
+            </div>
         </div>
 
 

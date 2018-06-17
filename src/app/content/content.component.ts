@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ContentService} from "../shared/content.service";
 
 @Component({
@@ -8,6 +8,12 @@ import {ContentService} from "../shared/content.service";
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
+  statusList = [
+    {"statusId":3,"statusName":"EDITED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
+    {"statusId":5,"statusName":"REVIEWED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
+    // {"statusId":4,"statusName":"DELETED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"}
+  ];
+
   contents =[];
    id=0;
    title:"";
@@ -17,7 +23,7 @@ export class ContentComponent implements OnInit {
   content={
     title:'test!'
   }
-  constructor(private route :ActivatedRoute,private contentService:ContentService) { }
+  constructor(private route :ActivatedRoute,private contentService:ContentService,private router: Router) { }
   ngOnInit() {
     this.audio = new Audio();
 
@@ -38,11 +44,18 @@ this.id = this.route.params['_value'].id;
 
 
     this.contentService.getContentBychannelId(this.route.params['_value'].id).subscribe( successData =>{
-
+let status = {}
       for (let successDataKey in successData) {
         this.contents.push(successData[successDataKey]);
-        //console.log(successData[successDataKey]);
+
+
+        //console.log(successData[successDataKey].statusName);
+        status[successData[successDataKey].status['statusName']] = successData[successDataKey].status;
       }
+
+      console.log(status);
+
+      console.log(JSON.stringify(status));
 
 
     });
@@ -50,12 +63,13 @@ this.id = this.route.params['_value'].id;
   }
 
   play(url:string,id:any){
-    console.log(url+this.audio.paused);
+    if(url == null) return;
+    //console.log(url+this.audio.paused);
 
     //  this.audio = new Audio();
     // this.audio.play();
     if (this.audio.paused) {
-      console.log("-========"+id);
+      // console.log("-========"+id);
       this.audio.src = url;
       this.audio.play();
       this.currntPlayerId = id;
@@ -68,6 +82,15 @@ this.id = this.route.params['_value'].id;
       //this.audio.paused=false;
       console.log("--"+this.currntPlayerId);
     }
+  }
+
+
+
+
+  addContent(id:string){
+
+   this.router.navigate(['/home/'+id+'/add-content']);
+
   }
 
 }

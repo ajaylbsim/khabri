@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 button.btn-submit{
     background-color: #38547b;
     color: #fff;
@@ -87,11 +90,6 @@ div.error-message i{
 /*}*/
 
 
-.cdk-overlay-container{
-  width: 150px;
-  margin-left: 31%;
-  margin-top: -5%;
-}
 
 .side-nav-style{
   background-color: #6E6767;
@@ -110,9 +108,9 @@ div.error-message i{
 }
 
 
-.marin-top{
-  margin-top: 16px;
-}
+/*.marin-top{*/
+  /*margin-top: 16px;*/
+/*}*/
 
 .khabri_tab{
   border-radius: 2px;
@@ -151,18 +149,18 @@ div.error-message i{
 
 
 
-.breadcrumb1:before {
-  content: '\E5CC';
-  color: blue !important;
-  vertical-align: top;
-  display: inline-block;
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 25px;
-  margin: 0 10px 0 8px;
-  -webkit-font-smoothing: antialiased;
-}
+/*.breadcrumb1:before {*/
+  /*content: '\E5CC';*/
+  /*color: blue !important;*/
+  /*vertical-align: top;*/
+  /*display: inline-block;*/
+  /*font-family: 'Material Icons';*/
+  /*font-weight: normal;*/
+  /*font-style: normal;*/
+  /*font-size: 25px;*/
+  /*margin: 0 10px 0 8px;*/
+  /*-webkit-font-smoothing: antialiased;*/
+/*}*/
 
 
 .khabri_tab_admin{
@@ -171,6 +169,19 @@ div.error-message i{
   padding: 15px!important;
 
 }
+
+
+.khabri_add_content_textarea {
+  width: 80%;
+  height: 10rem;
+  background-color: transparent;
+}
+/*.khabri_file_btn{*/
+  /*width: 200px;*/
+  /*height: 28px;*/
+  /*background-color: #ffffff !important;*/
+  /*left: -2px !important;*/
+/*}*/
 
 
 

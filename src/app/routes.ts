@@ -7,12 +7,16 @@ import { AuthGuard } from './auth/auth.guard';
 import {UserResolve} from "./user.resolve";
 import {ChannelComponent} from "./channel/channel.component";
 import {ContentComponent} from "./content/content.component";
+import {AddContentComponent} from "./add-content/add-content.component";
 
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent,canActivate:[AuthGuard],resolve:{user:UserResolve},
     children : [
       { path: 'channel', component: ChannelComponent },
-      { path: ':id/content', component: ContentComponent}
+      { path: ':id/content', component: ContentComponent},
+      { path: ':id/add-content', component: AddContentComponent}
+
+
 
     ]
     },

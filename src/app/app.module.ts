@@ -32,6 +32,8 @@ import {ChannelComponent} from "./channel/channel.component";
 import { ContentComponent } from './content/content.component';
 import {ContentService} from "./shared/content.service";
 import { TruncatePipe } from './limitToPipe';
+import { AddContentComponent } from './add-content/add-content.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -46,7 +48,8 @@ import { TruncatePipe } from './limitToPipe';
     FilterPipe,
     TruncatePipe,
     ChannelComponent,
-    ContentComponent
+    ContentComponent,
+    AddContentComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ import { TruncatePipe } from './limitToPipe';
     MatSelectModule,
     MatDividerModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressBarModule
   ],
   providers: [UserService,ChannelService,ContentService,AuthGuard,
     {
@@ -74,4 +78,7 @@ import { TruncatePipe } from './limitToPipe';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+
+}
