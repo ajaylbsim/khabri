@@ -171,6 +171,19 @@ div.error-message i{
 }
 
 
+.khabri_add_content_textarea {
+  width: 80%;
+  height: 10rem;
+  background-color: transparent;
+}
+/*.khabri_file_btn{*/
+  /*width: 200px;*/
+  /*height: 28px;*/
+  /*background-color: #ffffff !important;*/
+  /*left: -2px !important;*/
+/*}*/
+
+
 
 
 
