@@ -17,8 +17,11 @@ export class Content {
     private reviewer: User;
     private status: StatusMenu;
     private channel: Channel;
-    private tags: Array<TagMenu>;
-    private contentLocationRelation: Array<ContentLocationRelation>;
+    public tags: Array<TagMenu>;
+    public tagsList: [];
+
+
+  private contentLocationRelation: Array<ContentLocationRelation>;
 
     public setContentLocationRelation(contentLocationRelation: Array<ContentLocationRelation>) {
         this.contentLocationRelation = contentLocationRelation;

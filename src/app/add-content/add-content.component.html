@@ -2,6 +2,13 @@
 <!--<div class="col s12 offset-s2">-->
 <!--<div class="card grey lighten-2">-->
 <!--<div class="card-content white">-->
+
+
+
+
+
+
+
 <div class="row">
 
   <form class="col s12 " #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
@@ -51,9 +58,9 @@
 
 
 
-            <div class="card white darken-1">
+            <div class="card white ">
 
-              <div class="card-content blue-text">
+              <div class="card-content ">
 
                 <div class="row">
 
@@ -83,13 +90,13 @@
 
                   </div>
 
-                  <div class="col s6">
+                  <div class="col s3">
                     <mat-card-title> upload Image</mat-card-title>
                     <input type="file"  (change)="handleFileInput($event.target.files)"
                            placeholder="Upload file" accept=".pdf,.doc,.docx, .jpg">
                     <mat-progress-bar mode="determinate" value="{{imageprogress.percentage}}"></mat-progress-bar>
-                    <!--<img    width="200px" height="200Px" src="https://scontent.fdel1-3.fna.fbcdn.net/v/t1.0-9/14900469_984588194986766_3209390422372239427_n.jpg?_nc_cat=0&oh=1856bc8d93650e95bead0d7b0e647951&oe=5BBEF398">-->
-                    <img    width="200px" height="200Px" src="{{imageprogress.imageUrl}}">
+                    <img    width="200px" height="200Px" src="https://scontent.fdel1-3.fna.fbcdn.net/v/t1.0-9/14900469_984588194986766_3209390422372239427_n.jpg?_nc_cat=0&oh=1856bc8d93650e95bead0d7b0e647951&oe=5BBEF398">
+                    <!--<img    width="100%" height="auto" src="{{imageprogress.imageUrl}}">-->
 
 
 
@@ -107,10 +114,10 @@
 
 
     <div class="row">
-      <div class="input-field col s6">
+      <div class=" col s6">
 
         <div class="row">
-          <div class="input-field col s12">
+          <div class="col s12">
 
             <input class="validate" type="text" name="title" placeholder="Title" #UserName="ngModel"
                    [(ngModel)]="content.title">
@@ -118,10 +125,10 @@
 
           </div>
 
-          <div class="input-field col s12">
+          <div class=" col s12">
 
             <div class="row">
-              <div class="input-field col s6">
+              <div class="col s6">
                 <mat-form-field>
                   <mat-select placeholder="Select status">
                     <mat-option *ngFor="let status of statusList" [value]="status.statusId">
@@ -132,11 +139,11 @@
               </div>
 
 
-              <div class="input-field col s6">
+              <div class="col s6">
                 <mat-form-field>
                   <mat-select placeholder="Select priority">
-                    <mat-option *ngFor="let status of statusList" [value]="status.statusId">
-                      {{ status.statusName }}
+                    <mat-option *ngFor="let  priority of priorityList" [value]=" priority">
+                      {{  priority }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -154,7 +161,7 @@
       <div class="input-field col s6">
                   <textarea class="validate khabri_add_content_textarea" type="textarea"
                             name="description" #Password="ngModel" placeholder="Description"
-                            [(ngModel)]="content.description" required minlength="300">
+                            [(ngModel)]="content.description" required minlength="3">
                   </textarea>
         <!--<input class="validate" type="textarea" name="description" #Password="ngModel" -->
         <!--placeholder="Description" [(ngModel)]="content.description" required minlength="300">-->
@@ -166,16 +173,24 @@
 
 
     <div class="row">
-      <div class="input-field col s12">
-        <tag-input placeholder="+Tag" [ngModel]="itemsAsObjects" [identifyBy]="'id'" [displayBy]="'name'" [maxItems]='3'
-                   name="tags"></tag-input>
+      <div class="col s12">
+        <mat-form-field>
+          <mat-select placeholder="Select Tags">
+            <mat-option *ngFor="let tag of tagList" [value]="tag.tagId">
+              {{ tag.tagName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!--<tag-input placeholder="+Tag" [(ngModel)]="content.tagList" [identifyBy]="'id'" [displayBy]="'taName'" [maxItems]='3'-->
+                   <!--name="tags"></tag-input>-->
       </div>
 
-      <div class="input-field col s12">
-        <tag-input placeholder="+Latitude::Longitude" secondaryPlaceholder="+Location(eg=>17::29)"
-                   [onAdding]="onAdding" [ngModel]="locationsAsObjects" [identifyBy]="'id'" [displayBy]="'name'"
-                   [maxItems]='30' name="location"></tag-input>
-      </div>
+      <!--<div class="input-field col s12">-->
+        <!--<tag-input placeholder="+Latitude::Longitude" secondaryPlaceholder="+Location(eg=>17::29)"-->
+                   <!--[onAdding]="onAdding" [(ngModel)]="locationsAsObjects" [identifyBy]="'id'" [displayBy]="'name'"-->
+                   <!--[maxItems]='30' name="location"></tag-input>-->
+      <!--</div>-->
 
     </div>
 
@@ -186,7 +201,9 @@
       <div class="input-field col s3 ">
       </div>
       <div class="input-field col s3 ">
-        <button [disabled]="!userRegistrationForm.valid" class="btn-large btn-submit" type="submit">Submit</button>
+        <button class="btn-large btn-submit" (click)="addContent(userRegistrationForm)"type="submit">Submit</button>
+
+        <!--[disabled]="!userRegistrationForm.valid"-->
       </div>
       <div class="input-field col s3 ">
         <button [disabled]="!userRegistrationForm.valid" class="btn-large btn-submit" type="submit">Cancel</button>

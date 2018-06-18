@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 import {TagModel} from "ngx-chips/core/accessor";
 import {ContentService} from "../shared/content.service";
+import {Content, TagMenu} from "../model/content";
+import {TagInputForm} from "ngx-chips";
 
 @Component({
   selector: 'app-add-content',
@@ -10,17 +12,15 @@ import {ContentService} from "../shared/content.service";
 })
 export class AddContentComponent implements OnInit {
   user={};
-  content={};
+  content= new Content();
   fileProgressStatus = 0;
   fileToUpload:File;
   audioFileToUpload:File;
-  statusList = [
-    {"statusId":3,"statusName":"EDITED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
-    {"statusId":5,"statusName":"REVIEWED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
-    // {"statusId":4,"statusName":"DELETED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"}
-  ];
-  itemsAsObjects = [{id: 0, name: 'Angular'}, {id: 1, name: 'React'}];
+  priorityList: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+  itemsAsObjects = [];
   locationsAsObjects=[];
+  tagList:object[];
+  statusList: object[];
   imageprogress: {percentage: number} = {percentage: 0};
   audioContent: {percentage: number} = {percentage: 0};
   audio = new Audio();
@@ -29,9 +29,19 @@ export class AddContentComponent implements OnInit {
   // fileToUpload: File = null;
 
   ngOnInit() {
-    // this. fileToUpload = new File();
-    this.itemsAsObjects = [{id: 0, name: 'Angular'}, {id: 1, name: 'React'}];
+    this.itemsAsObjects =[ {id: 0, name: 'Angular'}, {id: 1, name: 'React'}];
     this.locationsAsObjects = [];
+    this.contentService.findAllTags().subscribe(data=>{
+     console.log(">>>>>>>>>>> ",data);
+     this.tagList =  <Array<any>>data;
+
+   });
+    this.contentService.findAllStatus(1,1).subscribe(data=>{
+      console.log(">>>>>>>>>>>statusList  ",data);
+      this.statusList =  <Array<any>>data;
+
+    });
+
   }
 
 
@@ -54,8 +64,10 @@ export class AddContentComponent implements OnInit {
     placeholder: '+ Tag'
   };
 
+
+
   public onAdding(tag) {
-    console.log(">>>>>>>>>>>tag  ",this);
+    console.log(">>>>>>>>>>>tag  ",tag);
     let arr = tag.split("::");
     let nm = "lat:"+arr[0]+" long:"+arr[1];
     console.log(">>>>>>>>>>>  ",this['_items'].push({id:1,name:nm}));
@@ -80,6 +92,9 @@ export class AddContentComponent implements OnInit {
     console.log('input focused: current value is ' + item);
   }
 
+  public addContent(form){
+    console.log("content      ",this.content);
+  }
 
   play(url:string){
     console.log(">>>>>>>>>>>url>>>>",this.audioContent);
