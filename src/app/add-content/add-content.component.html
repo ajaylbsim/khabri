@@ -1,58 +1,9 @@
+
 <!--<div class="row">-->
-<!--<div class="col s12 offset-s2">-->
-<!--<div class="card grey lighten-2">-->
-<!--<div class="card-content white">-->
-
-
-
-
-
-
-
-<div class="row">
 
   <form class="col s12 " #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
 
     <div class="row">
-
-      <!--<div class=" col s4">-->
-
-        <!--&lt;!&ndash;<div class="input-field ">&ndash;&gt;-->
-        <!--&lt;!&ndash;<input type="file" class="input-field" (change)="handleFileInput($event.target.files)"&ndash;&gt;-->
-        <!--&lt;!&ndash;placeholder="Upload file" accept=".pdf,.doc,.docx, .jpg">&ndash;&gt;-->
-        <!--&lt;!&ndash;<mat-progress-bar mode="determinate" value="{{fileProgressStatus}}"></mat-progress-bar>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--<div class="card white darken-1">-->
-
-          <!--<div class="card-content blue-text">-->
-            <!--<mat-card-title> upload Audio</mat-card-title>-->
-
-            <!--<input type="file" class="input-field" (change)="handleFileInput($event.target.files)"-->
-                   <!--placeholder="Upload file" accept=".pdf,.doc,.docx, .jpg">-->
-            <!--<mat-progress-bar mode="determinate" value="{{fileProgressStatus}}"></mat-progress-bar>-->
-
-
-            <!--<p><span>#</span>{{content.contentId}}</p>-->
-
-            <!--<p> {{content.title | limitTo:50}}</p>-->
-
-            <!--&lt;!&ndash;<img    width="200px" height="150px" src="{{fileToUpload}}">&ndash;&gt;-->
-
-
-          <!--</div>-->
-          <!--<div class="card-action ">-->
-
-            <!--<a class="pointer"><i class="material-icons" style="color:gray">edit</i></a>-->
-
-          <!--</div>-->
-
-
-        <!--</div>-->
-
-
-      <!--</div>-->
-
 
       <div class=" col s12">
 
@@ -66,8 +17,8 @@
 
                   <div class="col s6">
                     <mat-card-title> upload Audio</mat-card-title>
-                    <input type="file" (change)="handleAudioInput($event.target.files)"
-                           placeholder="Upload file" accept=".pdf,.doc,.docx, .mp3,.ogg">
+                    <input type="file" name="audiFile" required  (change)="handleAudioInput($event.target.files)"
+                           placeholder="Upload file" accept=".pdf,.doc,.docx, .mp3,.ogg" >
                     <mat-progress-bar mode="determinate" value="{{audioContent.percentage}}"></mat-progress-bar>
 
 
@@ -92,11 +43,11 @@
 
                   <div class="col s3">
                     <mat-card-title> upload Image</mat-card-title>
-                    <input type="file"  (change)="handleFileInput($event.target.files)"
+                    <input type="file" name="imageFile" required  (change)="handleFileInput($event.target.files)"
                            placeholder="Upload file" accept=".pdf,.doc,.docx, .jpg">
                     <mat-progress-bar mode="determinate" value="{{imageprogress.percentage}}"></mat-progress-bar>
-                    <img    width="200px" height="200Px" src="https://scontent.fdel1-3.fna.fbcdn.net/v/t1.0-9/14900469_984588194986766_3209390422372239427_n.jpg?_nc_cat=0&oh=1856bc8d93650e95bead0d7b0e647951&oe=5BBEF398">
-                    <!--<img    width="100%" height="auto" src="{{imageprogress.imageUrl}}">-->
+                    <!--<img    width="200px" height="200Px" src="https://scontent.fdel1-3.fna.fbcdn.net/v/t1.0-9/14900469_984588194986766_3209390422372239427_n.jpg?_nc_cat=0&oh=1856bc8d93650e95bead0d7b0e647951&oe=5BBEF398">-->
+                    <img    width="100%" height="auto" src="{{imageprogress.imageUrl}}">
 
 
 
@@ -120,7 +71,7 @@
           <div class="col s12">
 
             <input class="validate" type="text" name="title" placeholder="Title" #UserName="ngModel"
-                   [(ngModel)]="content.title">
+                   [(ngModel)]="content.title" required>
             <label data-error="Required field!"></label>
 
           </div>
@@ -130,8 +81,8 @@
             <div class="row">
               <div class="col s6">
                 <mat-form-field>
-                  <mat-select placeholder="Select status">
-                    <mat-option *ngFor="let status of statusList" [value]="status.statusId">
+                  <mat-select placeholder="Select status" [(ngModel)]="content.status" name="priority" >
+                    <mat-option *ngFor="let status of statusList" [value]="status" >
                       {{ status.statusName }}
                     </mat-option>
                   </mat-select>
@@ -140,9 +91,9 @@
 
 
               <div class="col s6">
-                <mat-form-field>
-                  <mat-select placeholder="Select priority">
-                    <mat-option *ngFor="let  priority of priorityList" [value]=" priority">
+                <mat-form-field required>
+                  <mat-select placeholder="Select priority" [(ngModel)]="content.priority"  name="priority" >
+                    <mat-option *ngFor="let  priority of priorityList" [value]="priority">
                       {{  priority }}
                     </mat-option>
                   </mat-select>
@@ -160,37 +111,37 @@
 
       <div class="input-field col s6">
                   <textarea class="validate khabri_add_content_textarea" type="textarea"
-                            name="description" #Password="ngModel" placeholder="Description"
+                            name="description" #description placeholder="Description"
                             [(ngModel)]="content.description" required minlength="3">
                   </textarea>
         <!--<input class="validate" type="textarea" name="description" #Password="ngModel" -->
         <!--placeholder="Description" [(ngModel)]="content.description" required minlength="300">-->
-        <label
-          [attr.data-error]="Password.errors!=null?(Password.errors.required?'Required field!':'Minimum 3 characters needed'):''"></label>
+        <!--<label-->
+          <!--[attr.data-error]="Password.errors!=null?(Password.errors.required?'Required field!':'Minimum 3 characters needed'):''">-->
+          <!---->
+        <!--</label>-->
       </div>
     </div>
 
 
 
     <div class="row">
-      <div class="col s12">
-        <mat-form-field>
-          <mat-select placeholder="Select Tags">
-            <mat-option *ngFor="let tag of tagList" [value]="tag.tagId">
-              {{ tag.tagName }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div class="col s6">
+        <ng-multiselect-dropdown
+          [placeholder]="'search and select Tags'"
+          [data]="tagList"
+          [(ngModel)]="selectedItems"
+          [settings]="dropdownSettings"
+          (onSelect)="onTagSelect($event)"
+          (onSelectAll)="onSelectAllTags($event)"
+          name="tes"
+        >
+        </ng-multiselect-dropdown>
 
-        <!--<tag-input placeholder="+Tag" [(ngModel)]="content.tagList" [identifyBy]="'id'" [displayBy]="'taName'" [maxItems]='3'-->
-                   <!--name="tags"></tag-input>-->
       </div>
 
-      <!--<div class="input-field col s12">-->
-        <!--<tag-input placeholder="+Latitude::Longitude" secondaryPlaceholder="+Location(eg=>17::29)"-->
-                   <!--[onAdding]="onAdding" [(ngModel)]="locationsAsObjects" [identifyBy]="'id'" [displayBy]="'name'"-->
-                   <!--[maxItems]='30' name="location"></tag-input>-->
-      <!--</div>-->
+
+
 
     </div>
 
@@ -201,27 +152,23 @@
       <div class="input-field col s3 ">
       </div>
       <div class="input-field col s3 ">
-        <button class="btn-large btn-submit" (click)="addContent(userRegistrationForm)"type="submit">Submit</button>
-
-        <!--[disabled]="!userRegistrationForm.valid"-->
+        <button [disabled]="!userRegistrationForm.valid" class="btn-large btn-submit" type="submit">Submit</button>
       </div>
       <div class="input-field col s3 ">
-        <button [disabled]="!userRegistrationForm.valid" class="btn-large btn-submit" type="submit">Cancel</button>
+        <button  class="btn-large btn-submit" type="button" (click)='onCancel(userRegistrationForm)'  >Cancel</button>
       </div>
     </div>
 
 
   </form>
 
-
+<div class="row">
+  <div class="col s12" style="height: 100px">
+  </div>
 </div>
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
 
 
-
+<!--</div>-->
 
 
 

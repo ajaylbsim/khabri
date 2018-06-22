@@ -14,9 +14,9 @@ export class ContentComponent implements OnInit {
     // {"statusId":4,"statusName":"DELETED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"}
   ];
 
-  contents =[];
-   id=0;
-   title:"";
+  contents = [];
+   id= 0;
+   title: '';
   currntPlayerId=-9;
   audio = new Audio();
 
@@ -31,7 +31,6 @@ export class ContentComponent implements OnInit {
 
 this.id = this.route.params['_value'].id;
 
-    // console.log(  this.route.params);
 
     this.route.queryParams.subscribe(params=>{
       this.title = params.title;
@@ -44,12 +43,11 @@ this.id = this.route.params['_value'].id;
 
 
     this.contentService.getContentBychannelId(this.route.params['_value'].id).subscribe( successData =>{
-let status = {}
-      for (let successDataKey in successData) {
+    const status = {};
+
+      for(const successDataKey in successData) {
         this.contents.push(successData[successDataKey]);
 
-
-        //console.log(successData[successDataKey].statusName);
         status[successData[successDataKey].status['statusName']] = successData[successDataKey].status;
       }
 
@@ -59,37 +57,31 @@ let status = {}
 
 
     });
-
   }
 
-  play(url:string,id:any){
-    if(url == null) return;
-    //console.log(url+this.audio.paused);
 
-    //  this.audio = new Audio();
-    // this.audio.play();
+  play(url: string, id: any) {
+    if (url == null) return;
     if (this.audio.paused) {
-      // console.log("-========"+id);
       this.audio.src = url;
       this.audio.play();
       this.currntPlayerId = id;
     } else {
       // this.audio.src = url;
-      console.log("--"+this.currntPlayerId);
+      console.log('--' + this.currntPlayerId);
 
       this.currntPlayerId = 909999;
       this.audio.pause();
-      //this.audio.paused=false;
-      console.log("--"+this.currntPlayerId);
+      console.log('--' + this.currntPlayerId);
     }
   }
 
 
 
 
-  addContent(id:string){
+  addContent(id: string) {
 
-   this.router.navigate(['/home/'+id+'/add-content']);
+   this.router.navigate(['/home/' + id + '/add-content' ]);
 
   }
 

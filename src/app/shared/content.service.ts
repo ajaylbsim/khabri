@@ -4,6 +4,7 @@ import {Constants} from "./config/constants";
 import {Observable} from "rxjs/Observable";
 import {BadInput} from "../../../oldKhabriCode/src/app/shared/error/bad-input";
 import {NotFoundError} from "../../../oldKhabriCode/src/app/shared/error/not-found-error";
+import {Content} from '../model/content';
 
 @Injectable()
 export class ContentService {
@@ -15,7 +16,7 @@ export class ContentService {
   getContentBychannelId(id){
     return this.http.get(Constants.SERVER_URL+"/channelService/v2/channel/"+id+"/getAllContentForAdmin");
   }
-  pushImageToStorage(file: File, progress: {percentage: number},isAudio:boolean) {
+  pushImageToStorage(file: File, progress: {percentage: number}, isAudio: boolean) {
     const formdata: FormData = new FormData();
 
     formdata.append('file', file);
@@ -51,12 +52,17 @@ export class ContentService {
     return this.http.get(Constants.SERVER_URL + '/tagService/v2/category/tag/findAll')
       .map(res => {
         return res;
-      });//.catch(this.handleError);
+      });
   }
 
+  public addContent(content: Content) {
+    return this.http.post(Constants.SERVER_URL + '/contentService/v2/content/add', content)
+      .map(res => {
+        return res;
+      });
+  }
 
-
-  public findAllStatus(userId:number,channelId:number) {
+  public findAllStatus(userId: number, channelId: number) {
     return this.http.get(Constants.SERVER_URL + '/userService/v2/user/' +userId+'/channel/' +channelId +'/getAllowedStatus')
       .map(res => {
         return res;

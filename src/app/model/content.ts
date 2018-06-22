@@ -1,19 +1,21 @@
 
 export class Content {
   private contentId: number;
+  status: StatusMenu;
   private dateAdded: Date;
   private dateModified: Date;
   private sourceUrl: string;
   private audioUrl: string;
   private imageUrl: string;
   private source: string;
-  private priority: number;
+  priority: number;
   private title: string;
-  private description: string;
+  description: string;
+  channel: object;
   private audioDuration: string;
   private isSponsored: boolean;
   private tags: Array<TagMenu>;
-  
+
   public setTags(tags: Array<TagMenu>) {
     this.tags = tags;
   }
@@ -54,13 +56,13 @@ export class Content {
     return this.title;
   }
 
-  public setPriority(priority: number) {
-    this.priority = priority;
-  }
-
-  public getPriority() {
-    return this.priority;
-  }
+  // public setPriority(priority: number) {
+  //   this.priority = priority;
+  // }
+  //
+  // public getPriority() {
+  //   return this.priority;
+  // }
   public setSource(source: string) {
     this.source = source;
   }

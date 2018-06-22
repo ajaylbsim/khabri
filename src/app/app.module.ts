@@ -34,6 +34,7 @@ import {ContentService} from "./shared/content.service";
 import { TruncatePipe } from './limitToPipe';
 import { AddContentComponent } from './add-content/add-content.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 
@@ -66,7 +67,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatDividerModule,
     MatListModule,
     MatIconModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [UserService,ChannelService,ContentService,AuthGuard,
     {
