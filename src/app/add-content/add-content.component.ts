@@ -36,7 +36,8 @@ export class AddContentComponent implements OnInit {
     this.nodeService.node$.subscribe(n => {
       console.log('shared data are', n);
       this.statusList = n['statusList'];
-      this.user = n;
+      this.user = n['user'];
+
     });
 
     console.log('this is add cntent', this.user);

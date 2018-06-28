@@ -20,6 +20,7 @@ export class ContentComponent implements OnInit {
    title: '';
   currntPlayerId=-9;
   audio = new Audio();
+  selectedStatusId = null;
 
   content={
     title:'test!'
@@ -32,7 +33,13 @@ export class ContentComponent implements OnInit {
     this.nodeService.node$.subscribe(n => {
       console.log('shared data are', n);
       this.statusList = n['statusList'];
-      this.user = n;
+      this.user = n['user'];
+      this.user['role'] = '';
+      this.user['role'] = this.user['roles'][0]['roleName'];
+
+
+      console.log('home user role>> ', this.user['role']  );
+
     });
 
 
@@ -52,7 +59,7 @@ export class ContentComponent implements OnInit {
 
 
 
-    this.contentService.getContentBychannelId(this.route.params['_value'].id).subscribe( successData =>{
+    this.contentService.getContentBychannelId(this.route.params['_value'].id, this.selectedStatusId).subscribe( successData =>{
     const status = {};
 
       for(const successDataKey in successData) {
@@ -94,5 +101,11 @@ export class ContentComponent implements OnInit {
    this.router.navigate(['/home/' + id + '/add-content' ]);
 
   }
+
+  OnStatusSelect() {
+    console.log('selectedStatusId '+this.selectedStatusId);
+  }
+
+
 
 }

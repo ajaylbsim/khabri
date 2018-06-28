@@ -35,9 +35,11 @@ export class HomeComponent implements OnInit {
     this.route.data.subscribe(successData => {
       this.user = successData.user;
       // console.log('home user data ', this.user );
-      this.sharedData['user'] = this.user
-      console.log('home user role ', this.user['role'] );
-        // this.nodeService.addNode(this.sharedData);
+      this.sharedData['user'] = this.user;
+      this.user['role'] = this.user['roles'][0]['roleName'];
+      this.user['isAdmin'] = (this.user['role'] == 'ADMIN');
+
+      // this.nodeService.addNode(this.sharedData);
 
       }
     );

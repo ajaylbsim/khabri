@@ -8,13 +8,20 @@ import {Content} from '../model/content';
 
 @Injectable()
 export class ContentService {
-
+  private  url :string = '';
   // readonly rootUrl = 'http://139.59.36.228:8080/khabri-web-app/khabri/';
 
   constructor(private http: HttpClient){}
 
-  getContentBychannelId(id){
-    return this.http.get(Constants.SERVER_URL + 'channelService/v2/channel/' + id + '/getAllContentForAdmin?statusId=3');
+  getContentBychannelId(id, statusId) {
+    if( statusId ){
+      this.url = Constants.SERVER_URL + 'channelService/v2/channel/' + id + '/getAllContentForAdmin?statusId=' + statusId;
+
+    }else{
+      this.url = Constants.SERVER_URL + 'channelService/v2/channel/' + id + '/getAllContentForAdmin?statusId';
+    }
+
+    return this.http.get(this.url);
   }
   pushImageToStorage(file: File, progress: {percentage: number}, isAudio: boolean) {
     const formdata: FormData = new FormData();

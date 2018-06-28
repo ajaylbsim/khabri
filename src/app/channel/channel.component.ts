@@ -15,14 +15,11 @@ export  class ChannelComponent implements OnInit {
   constructor(private channelService:ChannelService,private router: Router, private nodeService: NodeService){}
   user = {};
   channels = [];
-  statusList = [
-    {"statusId":3,"statusName":"EDITED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
-    {"statusId":5,"statusName":"REVIEWED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
-  ];
+  statusList = [];
   ngOnInit(){
     this.nodeService.node$.subscribe(n => {
       this.statusList = n['statusList'];
-      this.user = n;
+      this.user = n['user'];
     });
 
     console.log('this is logged in user ', this.user);

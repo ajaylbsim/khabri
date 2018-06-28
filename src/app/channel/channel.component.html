@@ -14,7 +14,7 @@
 
   <!--admin view start-->
 
-  <div class="row "  *ngIf="user.userId ==2">
+  <div class="row "  *ngIf="user.isAdmin">
     <div class="col s12">
       <div class="row" >
         <div class="col s3">
@@ -78,7 +78,7 @@
         <div class="col s4 ">
 
           <mat-form-field>
-            <mat-select placeholder="Select status">
+            <mat-select placeholder="Select status" (change)="OnStatusSelect()">
               <mat-option *ngFor="let status of statusList" [value]="status.statusId">
                 {{ status.statusName }}
               </mat-option>
@@ -125,7 +125,7 @@
                       </div>
                       <div class="card-action">
 
-                        <a class="pointer"><i class="material-icons" style="color:gray">delete</i></a>
+                        <a class="pointer" *ngIf="user.isAdmin"><i class="material-icons" style="color:gray">delete</i></a>
 
 
                         <a class="pointer" ><i class="material-icons" style="color:gray">edit</i></a>

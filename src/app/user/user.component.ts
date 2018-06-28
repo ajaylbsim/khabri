@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  _activeChild = {};
+    _activeChild = {};
 
   constructor(private activeRouter:ActivatedRoute) { }
 
