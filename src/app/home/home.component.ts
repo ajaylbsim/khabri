@@ -1,62 +1,57 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { UserService } from '../shared/user.service';
-import {ToastrService} from "ngx-toastr";
-import {ChannelService} from "../shared/channel.service";
+import {ToastrService} from 'ngx-toastr';
+import {ChannelService} from '../shared/channel.service';
+import {NodeService} from '../shared/NodeService';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  providers: [NodeService],
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  userClaims: {};
+  user: {};
   tags = [];
-  contents =[]
+  contents = [];
+  statusList = [];
+  sharedData = {};
 
   constructor(
     private router: Router,
     private userService: UserService,
     private toastr: ToastrService,
     private route: ActivatedRoute,
-    private channelService : ChannelService
+    private channelService: ChannelService,
+    private nodeService: NodeService
     ) { }
 
   ngOnInit() {
+    this.user = {};
 
-    this.channelService.getChannelByUserId(1).subscribe( successData =>{
 
-      for (let successDataKey in successData) {
-       // console.log(successData[successDataKey].title,successData[successDataKey]);
+
+    this.route.data.subscribe(successData => {
+      this.user = successData.user;
+      // console.log('home user data ', this.user );
+      this.sharedData['user'] = this.user
+      console.log('home user role ', this.user['role'] );
+        // this.nodeService.addNode(this.sharedData);
+
       }
+    );
 
+    this.route.data.subscribe(successData => {
+      // console.log('home  status .statusList ',  successData.statusList );
+      this.statusList =  successData.statusList;
+      this.sharedData['statusList'] = successData.statusList;
+      this.nodeService.addNode(this.sharedData);
 
     });
 
-    console.log("this.route.data",this.route.data);
-
-    this.route.data.subscribe(successData=>{
-      // console.log('user found is ',successData);
-      this.userClaims = successData.user;
-    },
-    error =>{
-      // console.log("error in fetching user",error);
-
-    }
-    )
 
 
- this.userClaims  = {"UserName":"ajay mishra","Email":"ajaylbsim@gmail.com","FirstName":"ajay","LastName":"mishra"}
- // =   this.userService.getUserClaims(); //.subscribe((data: any) => {
-  this.contents = [{name:'A',id:1 },{name:'B',id:2 },{name:'C',id:3 },{name:'D',id:4 },{name:'E',id:5 },{name:'F',id:6 } ];
-     this.userClaims = this.userService.getUserDetails('aankit@getkhabri.com','aankitroy123').subscribe(res=>{
-       this.userClaims = res;
-     },
-       errorRes=>{
-         this.toastr.error(errorRes.error.message|| "something went wrong!");
-
-       }
-       );
   }
 
   onTagsChanged(event){

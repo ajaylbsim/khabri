@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { User } from './user.model';
+import {Constants} from "./config/constants";
 
 @Injectable()
 export class UserService {
-  readonly rootUrl = 'http://139.59.36.228:8080/khabri-web-app/khabri/';
   constructor(private http: HttpClient) { }
 
   registerUser(user: User) {
@@ -17,7 +17,7 @@ export class UserService {
       LastName: user.LastName
     }
     var reqHeader = new HttpHeaders({'No-Auth':'True'});
-    return this.http.post(this.rootUrl + '/api/User/Register', body,{headers : reqHeader});
+    return this.http.post(Constants.SERVER_URL + 'api/User/Register', body,{headers : reqHeader});
   }
 
   userAuthentication(userName, password) {
@@ -25,7 +25,7 @@ export class UserService {
 
       var data = "email=" + userName + "&password=" + password;
    // var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','No-Auth':'True' });
-    return this.http.get(this.rootUrl + 'userService/v2/user/findUser?'+data);
+    return this.http.get(Constants.SERVER_URL + 'userService/v2/user/findUser?'+data);
   }
 
   getUserClaims(){
@@ -33,7 +33,7 @@ export class UserService {
   }
 
   getUserDetails(email,password){
-      return this.http.get(this.rootUrl+'/userService/v2/user/findUser'+'?email='+email+'&password='+password);
+      return this.http.get(Constants.SERVER_URL+'userService/v2/user/findUser'+'?email='+email+'&password='+password);
   }
 
 

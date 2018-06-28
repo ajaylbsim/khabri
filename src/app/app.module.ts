@@ -35,6 +35,8 @@ import { TruncatePipe } from './limitToPipe';
 import { AddContentComponent } from './add-content/add-content.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {CommonService} from './shared/common-service';
+import {StatusResolve} from "./shared/status.resolve";
 
 
 
@@ -70,13 +72,14 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MatProgressBarModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [UserService,ChannelService,ContentService,AuthGuard,
+  providers: [UserService, CommonService, ChannelService, ContentService, AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
       multi : true
     },
-    UserResolve
+    UserResolve,
+    StatusResolve
   ],
   bootstrap: [AppComponent]
 })

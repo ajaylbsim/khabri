@@ -8,13 +8,14 @@ import {UserResolve} from "./user.resolve";
 import {ChannelComponent} from "./channel/channel.component";
 import {ContentComponent} from "./content/content.component";
 import {AddContentComponent} from "./add-content/add-content.component";
+import {StatusResolve} from "./shared/status.resolve";
 
 export const appRoutes: Routes = [
-    { path: 'home', component: HomeComponent,canActivate:[AuthGuard],resolve:{user:UserResolve},
+    { path: 'home', component: HomeComponent,canActivate:[AuthGuard],resolve:{user:UserResolve, statusList: StatusResolve},
     children : [
       { path: 'channel', component: ChannelComponent },
       { path: ':id/content', component: ContentComponent},
-      { path: ':id/add-content', component: AddContentComponent}
+      { path: ':id/add-content', component: AddContentComponent,    data: { dataww:'' } }
 
 
 

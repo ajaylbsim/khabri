@@ -1,16 +1,16 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import { Observable } from 'rxjs/Rx';
-import  {UserService} from './shared/user.service'
 import {Injectable} from "@angular/core";
+import {CommonService} from "./common-service";
 
 @Injectable()
-export class UserResolve implements Resolve<any>{
-   constructor(private userService:UserService, ){};
+export class StatusResolve implements Resolve<any>{
+  constructor(private commonService: CommonService ){};
 
   resolve(route:ActivatedRouteSnapshot,
           state:RouterStateSnapshot,
   ): Observable<any> {
-    return this.userService.getUserDetails('aankit@getkhabri.com','aankitroy123');
+    return this.commonService.findAllStatus();
 
   }
 

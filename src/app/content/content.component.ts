@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ContentService} from "../shared/content.service";
+import {NodeService} from "../shared/NodeService";
 
 @Component({
   selector: 'app-content',
@@ -9,11 +10,11 @@ import {ContentService} from "../shared/content.service";
 })
 export class ContentComponent implements OnInit {
   statusList = [
-    {"statusId":3,"statusName":"EDITED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
-    {"statusId":5,"statusName":"REVIEWED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
+ //  {"statusId":3,"statusName":"EDITED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
+  //   {"statusId":5,"statusName":"REVIEWED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
     // {"statusId":4,"statusName":"DELETED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"}
   ];
-
+  user = {};
   contents = [];
    id= 0;
    title: '';
@@ -23,18 +24,27 @@ export class ContentComponent implements OnInit {
   content={
     title:'test!'
   }
-  constructor(private route :ActivatedRoute,private contentService:ContentService,private router: Router) { }
+  constructor(private route :ActivatedRoute,private contentService:ContentService,private router: Router, private nodeService : NodeService) { }
   ngOnInit() {
     this.audio = new Audio();
 
+
+    this.nodeService.node$.subscribe(n => {
+      console.log('shared data are', n);
+      this.statusList = n['statusList'];
+      this.user = n;
+    });
+
+
     console.log(  this.route.params['_value'].id)
 
-this.id = this.route.params['_value'].id;
+   this.id = this.route.params['_value'].id;
 
 
     this.route.queryParams.subscribe(params=>{
       this.title = params.title;
     })
+
 
 
 

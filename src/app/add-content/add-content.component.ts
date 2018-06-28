@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {ContentService} from '../shared/content.service';
 import {Content} from '../model/content';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NodeService} from "../shared/NodeService";
 
 @Component({
   selector: 'app-add-content',
@@ -9,6 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./add-content.component.css']
 })
 export class AddContentComponent implements OnInit {
+
   user= {};
   content: Content;
   fileToUpload: File;
@@ -28,8 +30,16 @@ export class AddContentComponent implements OnInit {
     placeholder: '+ Tag'
   };
 
-  constructor(private contentService: ContentService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private contentService: ContentService, private router: Router, private route: ActivatedRoute, private nodeService: NodeService) { }
   ngOnInit() {
+
+    this.nodeService.node$.subscribe(n => {
+      console.log('shared data are', n);
+      this.statusList = n['statusList'];
+      this.user = n;
+    });
+
+    console.log('this is add cntent', this.user);
     this.content = new Content();
     this.content.channel = { channelId: this.route.params['_value'].id};
     this.selectedItems = [
@@ -45,14 +55,15 @@ export class AddContentComponent implements OnInit {
     };
 
 
+
     this.itemsAsObjects = [ {id: 0, name: 'Angular'}, {id: 1, name: 'React'}];
     this.locationsAsObjects = [];
     this.contentService.findAllTags().subscribe(data => {
      this.tagList =  <Array<any>>data;
     });
-    this.contentService.findAllStatus(1, this.content.channel['channelId']).subscribe(data => {
-      this.statusList =  <Array<any>>data;
-    });
+    // this.contentService.findAllStatus(1, this.content.channel['channelId']).subscribe(data => {
+    //   this.statusList =  <Array<any>>data;
+    // });
   }
   OnSubmit( userRegistrationForm: any) {
     console.log(userRegistrationForm, this.content);

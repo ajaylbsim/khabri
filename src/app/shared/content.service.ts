@@ -14,14 +14,14 @@ export class ContentService {
   constructor(private http: HttpClient){}
 
   getContentBychannelId(id){
-    return this.http.get(Constants.SERVER_URL+"/channelService/v2/channel/"+id+"/getAllContentForAdmin");
+    return this.http.get(Constants.SERVER_URL + 'channelService/v2/channel/' + id + '/getAllContentForAdmin?statusId=3');
   }
   pushImageToStorage(file: File, progress: {percentage: number}, isAudio: boolean) {
     const formdata: FormData = new FormData();
 
     formdata.append('file', file);
 
-    let url = isAudio ? '/audio-content/upload/' :'/content/upload/';
+    let url = isAudio ? 'audio-content/upload/' :'/content/upload/';
 
     const req = new HttpRequest('POST',Constants.SERVER_URL+url +"1",formdata, {
       reportProgress: true,
