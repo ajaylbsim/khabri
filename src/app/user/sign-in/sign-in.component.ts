@@ -39,6 +39,9 @@ export class SignInComponent implements OnInit {
       },
       (err: HttpErrorResponse)=>{
         this.isLoginError = true;
+        console.log(HttpErrorResponse);
+        this.toast = this.toastr.error(' ! HttpErrorResponse');
+
       });
 
   }

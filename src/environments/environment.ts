@@ -4,5 +4,14 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  "api": {
+    "target": "http://ec2-13-232-117-193.ap-south-1.compute.amazonaws.com:8080/khabri-web-app/khabri",
+    "secure": false,
+    "pathRewrite": {
+      "api": ""
+    },
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
 };

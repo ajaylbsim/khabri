@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { User } from './user.model';
-import {Constants} from "./config/constants";
+import {Constants} from './config/constants';
+import {environment} from "../../environments/environment.prod";
 
 @Injectable()
 export class UserService {
@@ -21,10 +22,10 @@ export class UserService {
   }
 
   userAuthentication(userName, password) {
-    //http://139.59.36.228:8080/khabri-web-app/khabri/userService/v2/user/findUser?email=aankit%40getkhabri.com&password=aankitroy123
-
+    const env = environment
       var data = "email=" + userName + "&password=" + password;
-   // var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','No-Auth':'True' });
+      console.log(Constants.SERVER_URL + 'userService/v2/user/findUser?' + data);
+
     return this.http.get(Constants.SERVER_URL + 'userService/v2/user/findUser?'+data);
   }
 
