@@ -49,6 +49,7 @@ export  class ChannelComponent implements OnInit  {
 
   OnStatusSelect(event:  any)  {
     console.log('selectedStatusId ', this.selectedStatus, event);
+    this.contents = [];
     this.channelService.getChannelByUserId(this.user['userId'],this.selectedStatus).subscribe( successData => {
       this.channels = [];
       for(let successDataKey in successData)  {

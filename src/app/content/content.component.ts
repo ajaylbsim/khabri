@@ -107,7 +107,7 @@ export class ContentComponent implements OnInit {
 
   OnStatusSelect() {
     this.previusStatusId = this.selectedStatusId;
-
+    this.contents = [];
     // console.log('selectedStatusId ', this.selectedStatusId, event);
     if( this.contentServiceObserver) this.contentServiceObserver.unsubscribe();
 

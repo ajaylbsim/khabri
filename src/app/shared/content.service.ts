@@ -18,7 +18,7 @@ export class ContentService {
       this.url = Constants.SERVER_URL + 'channelService/v2/channel/' + id + '/getAllContentForAdmin?statusId=' + statusId;
 
     }else{
-      this.url = Constants.SERVER_URL + 'channelService/v2/channel/' + id + '/getAllContentForAdmin?statusId';
+      this.url = Constants.SERVER_URL + 'channelService/v2/channel/' + id + '/getAllContentForAdmin';
     }
 
     return this.http.get(this.url);
