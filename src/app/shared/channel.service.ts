@@ -1,14 +1,21 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Constants} from "./config/constants";
 
 @Injectable()
 export class ChannelService {
 
-  readonly rootUrl = 'http://139.59.36.228:8080/khabri-web-app/khabri/';
-
   constructor(private http: HttpClient){}
 
-  getChannelByUserId(id){
-return this.http.get(this.rootUrl+"/channelService/v2/channel/findByCreator/"+id);
+  getChannelByUserId(id) {
+    return this.http.get(Constants.SERVER_URL + '/channelService/v2/channel/findByCreator/' + id);
   }
+  // getCurrentChannel(){
+  //   return this.currentChannelInfo;
+  // }
+  getChannelMetaData(id) {
+    return  this.http.get(Constants.SERVER_URL + 'channelService/v2/channel/' + id  +  '/getChannelMetaData');
+
+  }
+
 }

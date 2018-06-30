@@ -29,7 +29,7 @@
           <div class="card">
             <div class="card-content khabri_tab khabri_tab_1">
               <!--<h5 class="md-display-3"> <a href="#">35 Live </a></h5>-->
-              <span class=" center ">25 Edited</span>
+              <span class=" center ">{{content.editedCount}} Edited</span>
 
             </div>
           </div>
@@ -40,7 +40,7 @@
           <div class="card">
             <div class="card-content khabri_tab khabri_tab_2 ">
               <!--<h5 class="md-display-3"> <a href="#"> Analytics </a></h5>-->
-              <span class=" center"> 35 Live </span>
+              <span class=" center"> {{content.liveCount}} Live </span>
 
 
             </div>
@@ -98,7 +98,7 @@
             <div class="col s6 ">
 
                 <mat-form-field>
-                  <mat-select placeholder="Select status" [(value)]="selectedStatusId" >
+                  <mat-select placeholder="Select status" [(value)]="selectedStatusId"  (change)="OnStatusSelect()">
                     <mat-option *ngFor="let status of statusList" [value]="status.statusId">
                       {{ status.statusName }}
                     </mat-option>

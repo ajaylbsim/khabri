@@ -11,7 +11,7 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(private router: Router) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      console.log(">>>>>>>>>>>>>>>>>>>>>> in AuthInterceptor");
+      // console.log(">>>>>>>>>>>>>>>>>>>>>> in AuthInterceptor");
 
         if (req.headers.get('No-Auth') == "True")
             return next.handle(req);

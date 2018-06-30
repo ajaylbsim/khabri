@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {ContentService} from "../shared/content.service";
-import {NodeService} from "../shared/NodeService";
+import {ActivatedRoute, Router} from '@angular/router';
+import {ContentService} from '../shared/content.service';
+import {NodeService} from '../shared/NodeService';
+import {ChannelService} from '../shared/channel.service';
 
 @Component({
   selector: 'app-content',
@@ -10,47 +11,68 @@ import {NodeService} from "../shared/NodeService";
 })
 export class ContentComponent implements OnInit {
   statusList = [
- //  {"statusId":3,"statusName":"EDITED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
-  //   {"statusId":5,"statusName":"REVIEWED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"},
-    // {"statusId":4,"statusName":"DELETED","dateAdded":"2017-10-29T18:58:27","dateModified":"2017-10-29T18:58:27"}
-  ];
+      {'statusId':1,'statusName':'ACTIVE','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
+      {'statusId':2,'statusName':'IN-ACTIVE','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
+      {'statusId':3,'statusName':'EDITED','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
+      {'statusId':4,'statusName':'DELETED','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
+      {'statusId':5,'statusName':'REVIEWED','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
+      {'statusId':6,'statusName':'RECORDED','dateAdded':'2017-11-20T11:20:45','dateModified':'2017-11-20T11:20:45'}
+    ];
   user = {};
   contents = [];
    id= 0;
    title: '';
-  currntPlayerId=-9;
+  currntPlayerId= -9;
   audio = new Audio();
-  selectedStatusId = null;
-
-  content={
-    title:'test!'
+  selectedStatusId = 5;
+  previusStatusId = null;
+  contentServiceObserver = null;
+  content= {
+    title: 'test!',
+    editedCount:0,
+    liveCount:0
   }
-  constructor(private route :ActivatedRoute,private contentService:ContentService,private router: Router, private nodeService : NodeService) { }
+
+  constructor(private route: ActivatedRoute, private contentService: ContentService, private router: Router, private nodeService: NodeService,  private channelService : ChannelService) {
+
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      this.title = params['title'];
+
+
+
+      this.channelService.getChannelMetaData(params['id'] ).subscribe(data => {
+        console.log(' content added ', data);
+        console.log(' content added ', data['contentCountByStatus']);
+        this.content.editedCount = data['contentCountByStatus'][3];
+        this.content.liveCount = data['contentCountByStatus'][1];
+
+
+      });
+    });
+
+  }
+
+
+
+
+
   ngOnInit() {
     this.audio = new Audio();
 
 
     this.nodeService.node$.subscribe(n => {
-      console.log('shared data are', n);
-      this.statusList = n['statusList'];
       this.user = n['user'];
       this.user['role'] = '';
       this.user['role'] = this.user['roles'][0]['roleName'];
-
-
-      console.log('home user role>> ', this.user['role']  );
-
     });
 
 
-    console.log(  this.route.params['_value'].id)
-
-   this.id = this.route.params['_value'].id;
 
 
-    this.route.queryParams.subscribe(params=>{
-      this.title = params.title;
-    })
+    // this.route.queryParams.subscribe(params => {
+    //   this.title = params.title;
+    // });
 
 
 
@@ -58,8 +80,7 @@ export class ContentComponent implements OnInit {
 
 
 
-
-    this.contentService.getContentBychannelId(this.route.params['_value'].id, this.selectedStatusId).subscribe( successData =>{
+  this.contentService.getContentBychannelId(this.route.params['_value'].id, this.selectedStatusId).subscribe( successData =>{
     const status = {};
 
       for(const successDataKey in successData) {
@@ -68,9 +89,9 @@ export class ContentComponent implements OnInit {
         status[successData[successDataKey].status['statusName']] = successData[successDataKey].status;
       }
 
-      console.log(status);
+      // console.log(status);
 
-      console.log(JSON.stringify(status));
+      // console.log(JSON.stringify(status));
 
 
     });
@@ -102,10 +123,33 @@ export class ContentComponent implements OnInit {
 
   }
 
+
   OnStatusSelect() {
-    console.log('selectedStatusId '+this.selectedStatusId);
+    this.previusStatusId = this.selectedStatusId;
+
+    console.log('selectedStatusId ', this.selectedStatusId, event);
+    if(this.contentServiceObserver)
+    this.contentServiceObserver.unsubscribe();
+
+    this.contentServiceObserver =  this.contentService.getContentBychannelId(this.route.params['_value'].id, this.selectedStatusId).subscribe( successData =>{
+      const status = {};
+      this.contents = [];
+      for(const successDataKey in successData) {
+        this.contents.push(successData[successDataKey]);
+
+        status[successData[successDataKey].status['statusName']] = successData[successDataKey].status;
+      }
+
+      console.log(status);
+
+      console.log(JSON.stringify(status));
+
+
+    });
+  }
+
   }
 
 
 
-}
+

@@ -11,11 +11,11 @@ import {AddContentComponent} from "./add-content/add-content.component";
 import {StatusResolve} from "./shared/status.resolve";
 
 export const appRoutes: Routes = [
-    { path: 'home', component: HomeComponent,canActivate:[AuthGuard],resolve:{user:UserResolve, statusList: StatusResolve},
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard], resolve: {user: UserResolve},
     children : [
       { path: 'channel', component: ChannelComponent },
       { path: ':id/content', component: ContentComponent},
-      { path: ':id/add-content', component: AddContentComponent,    data: { dataww:'' } }
+      { path: ':id/add-content', component: AddContentComponent,    data: { dataww: '' } }
 
 
 
@@ -30,6 +30,6 @@ export const appRoutes: Routes = [
         path: 'login', component: UserComponent,
         children: [{ path: '', component: SignInComponent }]
     },
-    { path : '', redirectTo:'/login', pathMatch : 'full'}
+    { path : '', redirectTo: '/login', pathMatch : 'full'}
 
 ];

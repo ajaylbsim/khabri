@@ -3,6 +3,7 @@ import {ContentService} from '../shared/content.service';
 import {Content} from '../model/content';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NodeService} from "../shared/NodeService";
+import {ChannelService} from "../shared/channel.service";
 
 @Component({
   selector: 'app-add-content',
@@ -30,21 +31,19 @@ export class AddContentComponent implements OnInit {
     placeholder: '+ Tag'
   };
 
-  constructor(private contentService: ContentService, private router: Router, private route: ActivatedRoute, private nodeService: NodeService) { }
+  constructor(private contentService: ContentService, private router: Router, private route: ActivatedRoute, private nodeService: NodeService, private channelService : ChannelService) { }
   ngOnInit() {
 
     this.nodeService.node$.subscribe(n => {
       console.log('shared data are', n);
       this.statusList = n['statusList'];
       this.user = n['user'];
-
     });
 
-    console.log('this is add cntent', this.user);
     this.content = new Content();
-    this.content.channel = { channelId: this.route.params['_value'].id};
     this.selectedItems = [
     ];
+    this.locationsAsObjects = [];
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'tagId',
@@ -55,19 +54,20 @@ export class AddContentComponent implements OnInit {
       allowSearchFilter: true
     };
 
+    this.route.params.subscribe(params => {
+      console.log(' content added ', params['id']);
+      this.content.channel = { channelId: params['id']};
 
-
-    this.itemsAsObjects = [ {id: 0, name: 'Angular'}, {id: 1, name: 'React'}];
-    this.locationsAsObjects = [];
-    this.contentService.findAllTags().subscribe(data => {
-     this.tagList =  <Array<any>>data;
+      this.channelService.getChannelMetaData(params['id']).subscribe(data => {
+        this.tagList = data['tags'];
+      });
     });
-    // this.contentService.findAllStatus(1, this.content.channel['channelId']).subscribe(data => {
-    //   this.statusList =  <Array<any>>data;
-    // });
+
+
+
   }
   OnSubmit( userRegistrationForm: any) {
-    console.log(userRegistrationForm, this.content);
+    // console.log(userRegistrationForm, this.content);
       this.content.setAudioUrl(this.audioContent.audioUrl);
       this.content.setImageUrl(this.imageprogress.imageUrl);
       this.content.setTags(this.selectedItems);

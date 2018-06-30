@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
       // console.log('home user data ', this.user );
       this.sharedData['user'] = this.user;
       this.user['role'] = this.user['roles'][0]['roleName'];
-      this.user['isAdmin'] = (this.user['role'] == 'ADMIN');
+      this.user['isAdmin'] = (this.user['role'] != 'ADMIN');
 
       // this.nodeService.addNode(this.sharedData);
 
