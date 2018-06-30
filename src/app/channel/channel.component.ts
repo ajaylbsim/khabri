@@ -23,7 +23,7 @@ export  class ChannelComponent implements OnInit  {
 
     this.nodeService.node$.subscribe(n =>  {
       this.user = n['user'];
-      this.channelService.getChannelByUserId(this.user['userId']).subscribe( successData => {
+      this.channelService.getChannelByUserId(this.user['userId'],this.selectedStatus).subscribe( successData => {
         for(let successDataKey in successData)  {
           this.channels.push(successData[successDataKey]);
           console.log(successData[successDataKey]);

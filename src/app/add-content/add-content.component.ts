@@ -17,7 +17,6 @@ export class AddContentComponent implements OnInit {
   fileToUpload: File;
   audioFileToUpload: File;
   priorityList: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-  itemsAsObjects = [];
   locationsAsObjects= [];
   tagList: object[];
   statusList: object[];
@@ -36,7 +35,14 @@ export class AddContentComponent implements OnInit {
 
     this.nodeService.node$.subscribe(n => {
       console.log('shared data are', n);
-      this.statusList = n['statusList'];
+      this.statusList =  [
+        {'statusId':1,'statusName':'ACTIVE','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
+        {'statusId':2,'statusName':'IN-ACTIVE','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
+        {'statusId':3,'statusName':'EDITED','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
+        {'statusId':4,'statusName':'DELETED','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
+        {'statusId':5,'statusName':'REVIEWED','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
+        {'statusId':6,'statusName':'RECORDED','dateAdded':'2017-11-20T11:20:45','dateModified':'2017-11-20T11:20:45'}
+      ];
       this.user = n['user'];
     });
 
@@ -67,11 +73,9 @@ export class AddContentComponent implements OnInit {
 
   }
   OnSubmit( userRegistrationForm: any) {
-    // console.log(userRegistrationForm, this.content);
       this.content.setAudioUrl(this.audioContent.audioUrl);
       this.content.setImageUrl(this.imageprogress.imageUrl);
       this.content.setTags(this.selectedItems);
-      // this.content.channel = { channelId: };
 
      this.contentService.addContent(this.content).subscribe(data => {
        console.log(' content added ', data);
@@ -99,30 +103,27 @@ export class AddContentComponent implements OnInit {
 
 
   public onAdding(tag) {
-    // let arr = tag.split('::');
-    // let nm = 'lat:' + arr[0] + ' long:' + arr[1];
     this['inputTextValue'] = '';
     return tag;
   }
 
-  public onAdd(item) {
-    console.log('tag added: value is ' + item);
-  }
-
-  public onRemove(item) {
-    console.log('tag removed: value is ' + item);
-  }
-
-  public onSelect(event: any) {
-    console.log('tag selected: value is ' + event);
-  }
-
-  public onFocus(item) {
-    console.log('input focused: current value is ' + item);
-  }
+  // public onAdd(item) {
+  //   console.log('tag added: value is ' + item);
+  // }
+  //
+  // public onRemove(item) {
+  //   console.log('tag removed: value is ' + item);
+  // }
+  //
+  // public onSelect(event: any) {
+  //   console.log('tag selected: value is ' + event);
+  // }
+  //
+  // public onFocus(item) {
+  //   console.log('input focused: current value is ' + item);
+  // }
 
   public addContent(form) {
-    // console.log('' , this.content);
   }
 
   play(url: string ) {
@@ -133,7 +134,6 @@ export class AddContentComponent implements OnInit {
       this.audio.play();
     } else {
       this.audio.pause();
-      // this.audio.paused = false;
     }
   }
 

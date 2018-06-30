@@ -37,6 +37,9 @@ export class UserService {
       return this.http.get(Constants.SERVER_URL+'userService/v2/user/findUser'+'?email='+email+'&password='+password);
   }
 
+  getUserDetailsById(id){
+    return this.http.get(Constants.SERVER_URL+'/userService/v2/user/findById/'+id);
+  }
 
 
 

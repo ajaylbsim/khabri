@@ -24,11 +24,11 @@ export class ContentComponent implements OnInit {
    title: '';
   currntPlayerId= -9;
   audio = new Audio();
-  selectedStatusId = 5;
+  selectedStatusId = null;
   previusStatusId = null;
   contentServiceObserver = null;
   content= {
-    title: 'test!',
+    title: '',
     editedCount:0,
     liveCount:0
   }
@@ -49,6 +49,16 @@ export class ContentComponent implements OnInit {
 
 
       });
+
+
+      this.contentService.getContentBychannelId(params['id'], this.selectedStatusId).subscribe( successData =>{
+        const status = {};
+        for(const successDataKey in successData) {
+          this.contents.push(successData[successDataKey]);
+          status[successData[successDataKey].status['statusName']] = successData[successDataKey].status;
+        }
+      });
+
     });
 
   }
@@ -69,32 +79,6 @@ export class ContentComponent implements OnInit {
 
 
 
-
-    // this.route.queryParams.subscribe(params => {
-    //   this.title = params.title;
-    // });
-
-
-
-
-
-
-
-  this.contentService.getContentBychannelId(this.route.params['_value'].id, this.selectedStatusId).subscribe( successData =>{
-    const status = {};
-
-      for(const successDataKey in successData) {
-        this.contents.push(successData[successDataKey]);
-
-        status[successData[successDataKey].status['statusName']] = successData[successDataKey].status;
-      }
-
-      // console.log(status);
-
-      // console.log(JSON.stringify(status));
-
-
-    });
   }
 
 
@@ -105,9 +89,6 @@ export class ContentComponent implements OnInit {
       this.audio.play();
       this.currntPlayerId = id;
     } else {
-      // this.audio.src = url;
-      console.log('--' + this.currntPlayerId);
-
       this.currntPlayerId = 909999;
       this.audio.pause();
       console.log('--' + this.currntPlayerId);
@@ -128,8 +109,7 @@ export class ContentComponent implements OnInit {
     this.previusStatusId = this.selectedStatusId;
 
     console.log('selectedStatusId ', this.selectedStatusId, event);
-    if(this.contentServiceObserver)
-    this.contentServiceObserver.unsubscribe();
+    if( this.contentServiceObserver) this.contentServiceObserver.unsubscribe();
 
     this.contentServiceObserver =  this.contentService.getContentBychannelId(this.route.params['_value'].id, this.selectedStatusId).subscribe( successData =>{
       const status = {};
@@ -139,11 +119,6 @@ export class ContentComponent implements OnInit {
 
         status[successData[successDataKey].status['statusName']] = successData[successDataKey].status;
       }
-
-      console.log(status);
-
-      console.log(JSON.stringify(status));
-
 
     });
   }

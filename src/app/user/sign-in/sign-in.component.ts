@@ -31,7 +31,10 @@ export class SignInComponent implements OnInit {
 
        this.userService.userAuthentication(userName,password).subscribe((data : any)=>{
         console.log("data is ",data);
-        //localStorage.setItem('userToken',data.access_token);
+
+           // this.user['role'] = data['roles'][0]['roleName'];
+           localStorage.setItem('isAdmin', (data['role'] == 'ADMIN') + '');
+           localStorage.setItem('user',JSON.stringify(data));
            // localStorage.setItem("userToken", password);
            this.toastr.clear(this.toast.toastId);
            this.toast = this.toastr.success('Welcome to khabri !');
