@@ -25,11 +25,11 @@ export class HomeComponent implements OnInit {
 
 
     this.route.data.subscribe(successData => {
-      console.log(successData.user);
       this.user = successData.user;
       this.sharedData['user'] = this.user;
-       this.user['role'] = 'ADMIN';
-      this.user['isAdmin'] =  localStorage.getItem('isAdmin');
+       // this.user['role'] = 'ADMIN';
+      this.user['isAdmin'] =  localStorage.getItem('isAdmin') == 'true';
+
       }
     );
 

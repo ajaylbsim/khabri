@@ -42,8 +42,8 @@ export class ContentComponent implements OnInit {
 
 
       this.channelService.getChannelMetaData(params['id'] ).subscribe(data => {
-        console.log(' content added ', data);
-        console.log(' content added ', data['contentCountByStatus']);
+        // console.log(' content added ', data);
+        // console.log(' content added ', data['contentCountByStatus']);
         this.content.editedCount = data['contentCountByStatus'][3];
         this.content.liveCount = data['contentCountByStatus'][1];
 
@@ -108,7 +108,7 @@ export class ContentComponent implements OnInit {
   OnStatusSelect() {
     this.previusStatusId = this.selectedStatusId;
 
-    console.log('selectedStatusId ', this.selectedStatusId, event);
+    // console.log('selectedStatusId ', this.selectedStatusId, event);
     if( this.contentServiceObserver) this.contentServiceObserver.unsubscribe();
 
     this.contentServiceObserver =  this.contentService.getContentBychannelId(this.route.params['_value'].id, this.selectedStatusId).subscribe( successData =>{

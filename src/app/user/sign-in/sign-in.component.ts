@@ -30,10 +30,10 @@ export class SignInComponent implements OnInit {
 
 
        this.userService.userAuthentication(userName,password).subscribe((data : any)=>{
-        console.log("data is ",data);
 
-           // this.user['role'] = data['roles'][0]['roleName'];
-           localStorage.setItem('isAdmin', (data['role'] == 'ADMIN') + '');
+           let role  = data['roles'][0]['roleName'];
+
+           localStorage.setItem('isAdmin', (role =='ADMIN') + '');
            localStorage.setItem('user',JSON.stringify(data));
            // localStorage.setItem("userToken", password);
            this.toastr.clear(this.toast.toastId);
