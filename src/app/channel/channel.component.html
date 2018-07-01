@@ -115,15 +115,26 @@
                 <div class="card">
                   <div class="card-content  blue-text pointer" (click) ="move(content.channelId,content.title)" >
 
-                    <p> <span>#</span>{{content.channelId}}</p>
+                    <p> <span>#</span>
+                       {{content.channelId}}
+                    </p>
 
                         <p> {{content.title | limitTo:50}}</p>
 
-                        <img    width="200px" height="150px" src="{{content.imageUrl}}">
+                        <img  width="200px" height="150px" src="{{content.imageUrl}}">
 
 
                       </div>
-                      <div class="card-action">
+
+                  <div  >
+
+                  <span class="clour_darkgray justify  " style="font-size: 0.75em; margin-left: 1%">Added On :: {{content.dateAdded |date : format : shortDate}}</span>
+
+                  <span class="clour_darkgray justify " *ngIf="content.dateAdded != content.dateModified"  style="font-size: 0.75em; margin-left: 2%" >Modified On :: {{content.dateModified |date : format : shortDate}}</span>
+
+                  </div>
+
+                  <div class="card-action">
 
                         <a class="pointer" *ngIf="user.isAdmin"><i class="material-icons" style="color:gray">delete</i></a>
 

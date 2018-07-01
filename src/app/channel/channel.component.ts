@@ -59,7 +59,7 @@ export  class ChannelComponent implements OnInit  {
       this.channels = [];
       for(let successDataKey in successData)  {
         this.channels.push(successData[successDataKey]);
-        // console.log(successData[successDataKey]);
+        console.log(successData[successDataKey]);
       }
     });
   }
