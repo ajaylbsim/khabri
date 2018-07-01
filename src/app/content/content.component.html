@@ -1,13 +1,24 @@
 
 <div class="nav-wrapper">
-  <div class="col s12" >
-    <a href="/home/channel" class="breadcrumb blue-text">channel</a>
-    <a  href="/home/{{id}}/content?title={{title}}" class="breadcrumb blue-text">{{title}}</a>
+  <div class="col s12 breadcrumb  blue-text" >
+    <!--<a href="/home/channel" class="breadcrumb blue-text">channel</a>-->
+
+    <span  (click)="naviagte()"  class="breadcrumb-item  pointer">channel</span>
+    >>
+    <span (click)="naviagte(true)"   class="breadcrumb-item blue-text pointer">{{title}}</span>
 
   </div>
 </div>
+
+<!--<ol class="breadcrumb">-->
+  <!--<li><a routerLink="" class="breadcrumb">Home</a></li>-->
+  <!--<li *ngFor="let breadcrumb of breadcrumbs">-->
+    <!--<a [routerLink]="[breadcrumb.url, breadcrumb.params]">{{ breadcrumb.label }}</a>-->
+  <!--</li>-->
+<!--</ol>-->
+
+
  <div class="row " style="margin-top: 20px">
-``
     <div class="col s1">
       <div class="card">
 

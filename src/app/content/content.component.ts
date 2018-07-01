@@ -1,40 +1,67 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ContentService} from '../shared/content.service';
 import {NodeService} from '../shared/NodeService';
 import {ChannelService} from '../shared/channel.service';
 
 @Component({
-  selector: 'app-content',
-  templateUrl: './content.component.html',
-  styleUrls: ['./content.component.css']
+  selector:  'app-content',
+  templateUrl:  './content.component.html',
+  styleUrls:  ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
   statusList = [
-      {'statusId':1,'statusName':'ACTIVE','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
-      {'statusId':2,'statusName':'IN-ACTIVE','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
-      {'statusId':3,'statusName':'EDITED','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
-      {'statusId':4,'statusName':'DELETED','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
-      {'statusId':5,'statusName':'REVIEWED','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
-      {'statusId':6,'statusName':'RECORDED','dateAdded':'2017-11-20T11:20:45','dateModified':'2017-11-20T11:20:45'}
+      // {'statusId': 1,'statusName': 'ACTIVE','dateAdded': '2017-10-29T18: 58: 27','dateModified': '2017-10-29T18: 58: 27'},
+      // {'statusId': 2,'statusName': 'IN-ACTIVE','dateAdded': '2017-10-29T18: 58: 27','dateModified': '2017-10-29T18: 58: 27'},
+      {'statusId': 3,'statusName': 'EDITED','dateAdded': '2017-10-29T18: 58: 27','dateModified': '2017-10-29T18: 58: 27'},
+      {'statusId': 4,'statusName': 'DELETED','dateAdded': '2017-10-29T18: 58: 27','dateModified': '2017-10-29T18: 58: 27'},
+      {'statusId': 5,'statusName': 'REVIEWED','dateAdded': '2017-10-29T18: 58: 27','dateModified': '2017-10-29T18: 58: 27'},
+      {'statusId': 6,'statusName': 'RECORDED','dateAdded': '2017-11-20T11: 20: 45','dateModified': '2017-11-20T11: 20: 45'}
     ];
   user = {};
   contents = [];
    id= 0;
-   title: '';
+   title:  '';
   currntPlayerId= -9;
   audio = new Audio();
   selectedStatusId = null;
   previusStatusId = null;
   contentServiceObserver = null;
   content= {
-    title: '',
-    editedCount:0,
-    liveCount:0
+    title:  '',
+    editedCount: 0,
+    liveCount: 0
   }
+  breadcrumbs = [
+    {url:  'wqdewd',
+    params: {},
+    label: '111111'
+    },
+    {url: 'wqdewd',
+      params: {},
+      label: '22222'
+    },
+    {url: 'wqdewd',
+      params: {},
+      label: '333333'
+    }
+  ]
+  constructor(private route:  ActivatedRoute, private contentService:  ContentService, private router:  Router, private nodeService:  NodeService,  private channelService :  ChannelService) {
 
-  constructor(private route: ActivatedRoute, private contentService: ContentService, private router: Router, private nodeService: NodeService,  private channelService : ChannelService) {
-
+    this.breadcrumbs = [
+      {url: 'wqdewd',
+        params: {},
+        label: '111111'
+      },
+      {url: 'wqdewd',
+        params: {},
+        label: '22222'
+      },
+      {url: 'wqdewd',
+        params: {},
+        label: '333333'
+      }
+    ];
     this.route.params.subscribe(params => {
       this.id = params['id'];
       this.title = params['title'];
@@ -45,7 +72,9 @@ export class ContentComponent implements OnInit {
         // console.log(' content added ', data);
         // console.log(' content added ', data['contentCountByStatus']);
         this.content.editedCount = data['contentCountByStatus'][3];
-        this.content.liveCount = data['contentCountByStatus'][1];
+        this.content.liveCount = data['contentCountByStatus'][5];
+        this.title = data['title'];
+
 
 
       });
@@ -82,7 +111,7 @@ export class ContentComponent implements OnInit {
   }
 
 
-  play(url: string, id: any) {
+  play(url:  string, id:  any) {
     if (url == null) return;
     if (this.audio.paused) {
       this.audio.src = url;
@@ -98,7 +127,7 @@ export class ContentComponent implements OnInit {
 
 
 
-  addContent(id: string) {
+  addContent(id:  string) {
 
    this.router.navigate(['/home/' + id + '/add-content' ]);
 
@@ -108,7 +137,6 @@ export class ContentComponent implements OnInit {
   OnStatusSelect() {
     this.previusStatusId = this.selectedStatusId;
     this.contents = [];
-    // console.log('selectedStatusId ', this.selectedStatusId, event);
     if( this.contentServiceObserver) this.contentServiceObserver.unsubscribe();
 
     this.contentServiceObserver =  this.contentService.getContentBychannelId(this.route.params['_value'].id, this.selectedStatusId).subscribe( successData =>{
@@ -121,6 +149,25 @@ export class ContentComponent implements OnInit {
       }
 
     });
+
+
+  }
+
+
+  naviagte(reload: boolean){
+    if(reload) {
+      // this.router.navigate(['/home/' + this.id + '/content?title=' + this.title]);
+      let navigationExtras:   NavigationExtras =  {
+        queryParams:    {
+          'title':  this.title
+        }
+      };
+      this.router.navigate(['/home/' + this.id + '/content'], navigationExtras);
+    }else{
+      this.router.navigate(['/home/channel']);
+    }
+
+
   }
 
   }

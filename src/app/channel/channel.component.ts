@@ -46,6 +46,11 @@ export  class ChannelComponent implements OnInit  {
     this.router.navigate(['/home/' + id + '/content'], navigationExtras);
   }
 
+  naviagte(){
+    this.router.navigate(['/home/channel']);
+
+  }
+
 
   OnStatusSelect(event:  any)  {
     console.log('selectedStatusId ', this.selectedStatus, event);
@@ -54,7 +59,7 @@ export  class ChannelComponent implements OnInit  {
       this.channels = [];
       for(let successDataKey in successData)  {
         this.channels.push(successData[successDataKey]);
-        console.log(successData[successDataKey]);
+        // console.log(successData[successDataKey]);
       }
     });
   }
