@@ -1,0 +1,178 @@
+
+
+<form class="col s12 " #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
+
+  <div class="row">
+
+    <div class=" col s12">
+
+
+
+      <div class="card white ">
+
+        <div class="card-content ">
+
+          <div class="row">
+
+
+
+            <div class="col s6">
+
+              <div class="clour_darkgray"> Content Id : # {{content.contentId}}</div>
+              <mat-card-title> upload Audio</mat-card-title>
+              <input type="file" #myInputVariable  name="audiFile" required  (change)="handleAudioInput($event.target.files)"
+                     placeholder="Upload file" accept=".pdf,.doc,.docx, .mp3,.ogg" >
+              <mat-progress-bar mode="determinate" value="{{audioContent.percentage}}"></mat-progress-bar>
+
+
+
+              <div class="card white darken-1">
+
+                <div class="card-content blue-text center">
+
+                    <span class="pointer " (click)="play(audioContent.audioUrl)" >
+                  <mat-icon class="large material-icons pointer" *ngIf="audioContent.audioUrl&&audio.paused"  > play_circle_outline</mat-icon>
+
+                  <mat-icon class=" small material-icons pointer" *ngIf="!audio.paused" > pause_circle_outline</mat-icon>
+
+                  <a class="disabled"> <mat-icon class=" small material-icons disabled grey-text" *ngIf="!audioContent.audioUrl" > volume_off</mat-icon> </a>
+
+                </span>
+
+                </div></div>
+
+
+            </div>
+
+            <div class="col s3">
+              <mat-card-title> upload Image</mat-card-title>
+              <input type="file" name="imageFile" required  (change)="handleFileInput($event.target.files)"
+                     placeholder="Upload file" accept=".pdf,.doc,.docx, .jpg">
+              <mat-progress-bar mode="determinate" value="{{imageprogress.percentage}}"></mat-progress-bar>
+              <!--<img    width="200px" height="200Px" src="https://scontent.fdel1-3.fna.fbcdn.net/v/t1.0-9/14900469_984588194986766_3209390422372239427_n.jpg?_nc_cat=0&oh=1856bc8d93650e95bead0d7b0e647951&oe=5BBEF398">-->
+              <img    width="100%" height="auto" src="{{imageprogress.imageUrl}}">
+
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+  <div class="row">
+    <div class=" col s6">
+
+      <div class="row">
+        <div class="col s12">
+
+          <input class="validate" type="text" name="title" placeholder="Title" #UserName="ngModel"
+                 [(ngModel)]="content.title" required>
+          <label data-error="Required field!"></label>
+
+        </div>
+
+        <div class=" col s12">
+
+          <div class="row">
+            <div class="col s6">
+              <mat-form-field>
+                <mat-select placeholder="Select status" [(ngModel)]="content.status" name="status" >
+                  <mat-option *ngFor="let status of statusList" [value]="status" >
+                    {{ status.statusName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+            <div class="col s6">
+              <mat-form-field >
+                <mat-select placeholder="Select priority" [(ngModel)]="content.priority"  name="prio" >
+                  <mat-option *ngFor="let  priority of priorityList" [value]="priority">
+                    {{  priority }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="input-field col s6">
+                  <textarea class="validate khabri_add_content_textarea" type="textarea"
+                            name="description" #description placeholder="Description"
+                            [(ngModel)]="content.description" required minlength="3">
+                  </textarea>
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col s6">
+      <ng-multiselect-dropdown
+        [placeholder]="'search and select Tags'"
+        [data]="tagList"
+        [(ngModel)]="selectedItems"
+        [settings]="dropdownSettings"
+        (onSelect)="onTagSelect($event)"
+        (onSelectAll)="onSelectAllTags($event)"
+        name="tes"
+      >
+      </ng-multiselect-dropdown>
+
+    </div>
+
+
+
+
+  </div>
+
+
+
+
+  <div class="row center">
+    <div class="input-field col s3 ">
+    </div>
+    <div class="input-field col s3 ">
+      <button [disabled]="!userRegistrationForm.valid" class="btn-large btn-submit" type="submit">Submit</button>
+    </div>
+    <div class="input-field col s3 ">
+      <button  class="btn-large btn-submit" type="button" (click)='onCancel(userRegistrationForm)'  >Cancel</button>
+    </div>
+  </div>
+
+
+</form>
+
+<div class="row">
+  <div class="col s12" style="height: 100px">
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

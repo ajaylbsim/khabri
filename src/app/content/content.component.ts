@@ -170,6 +170,12 @@ export class ContentComponent implements OnInit {
 
   }
 
+  editContent(ContentId:number){
+      this.router.navigate(['/home/' + this.id + '/' + ContentId + '/edit']);
+
+
+  }
+
   }
 
 

@@ -37,6 +37,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {CommonService} from './shared/common-service';
 import {StatusResolve} from "./shared/status.resolve";
+import {EditContentComponent} from "./content/edit-content/edit.content";
 
 
 
@@ -52,7 +53,8 @@ import {StatusResolve} from "./shared/status.resolve";
     TruncatePipe,
     ChannelComponent,
     ContentComponent,
-    AddContentComponent
+    AddContentComponent,
+    EditContentComponent
   ],
   imports: [
     BrowserModule,

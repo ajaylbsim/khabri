@@ -62,7 +62,7 @@ export class ContentService {
       });
   }
 
-  public addContent(content: Content) {
+  public addContent(content: any) {
     return this.http.post(Constants.SERVER_URL + '/contentService/v2/content/add', content)
       .map(res => {
         return res;

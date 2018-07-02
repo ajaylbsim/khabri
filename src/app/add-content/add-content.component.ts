@@ -4,6 +4,7 @@ import {Content} from '../model/content';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NodeService} from "../shared/NodeService";
 import {ChannelService} from "../shared/channel.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-add-content',
@@ -29,15 +30,15 @@ export class AddContentComponent implements OnInit {
     readonly: undefined,
     placeholder: '+ Tag'
   };
+  toast = {};
 
-  constructor(private contentService: ContentService, private router: Router, private route: ActivatedRoute, private nodeService: NodeService, private channelService : ChannelService) { }
+  constructor(private contentService: ContentService, private router: Router, private route: ActivatedRoute,
+              private nodeService: NodeService, private channelService : ChannelService, private toastr: ToastrService) { }
   ngOnInit() {
 
     this.nodeService.node$.subscribe(n => {
       console.log('shared data are', n);
       this.statusList =  [
-        {'statusId':1,'statusName':'ACTIVE','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
-        {'statusId':2,'statusName':'IN-ACTIVE','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
         {'statusId':3,'statusName':'EDITED','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
         {'statusId':4,'statusName':'DELETED','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
         {'statusId':5,'statusName':'REVIEWED','dateAdded':'2017-10-29T18:58:27','dateModified':'2017-10-29T18:58:27'},
@@ -78,8 +79,13 @@ export class AddContentComponent implements OnInit {
       this.content.setTags(this.selectedItems);
 
      this.contentService.addContent(this.content).subscribe(data => {
-       console.log(' content added ', data);
-       this.router.navigate(['/home/' + this.content.channel['channelId'] + '/content']);
+       // console.log(' content added ', data);
+       this.toast = this.toastr.success('Added successfully !');
+       setTimeout(()=>{  this.router.navigate(['/home/' + this.content.channel['channelId'] + '/content']); }, 1000);
+
+
+
+
      });
   }
 

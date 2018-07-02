@@ -17,11 +17,14 @@ export class ChannelService {
     }
     return this.http.get(url);
   }
-  // getCurrentChannel(){
-  //   return this.currentChannelInfo;
-  // }
+
   getChannelMetaData(id) {
     return  this.http.get(Constants.SERVER_URL + 'channelService/v2/channel/' + id  +  '/getChannelMetaData');
+
+  }
+
+  getContentById(id) {
+    return  this.http.get(Constants.SERVER_URL + '/contentService/v2/content/findById/' + id);
 
   }
 
