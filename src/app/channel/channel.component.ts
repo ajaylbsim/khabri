@@ -64,8 +64,14 @@ export  class ChannelComponent implements OnInit  {
     });
   }
 
+  compareDate(d1, d2) {
+    if (d1 && d2) {
+      return ( d1.substring(0, 18) != d2.substring(0, 18));
+    } else {
+      return false;
+    }
 
-
+  }
 
 
 }

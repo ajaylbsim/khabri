@@ -112,6 +112,7 @@ export class ContentComponent implements OnInit {
 
 
   play(url:  string, id:  any) {
+    // console.log(url,id);
     if (url == null) return;
     if (this.audio.paused) {
       this.audio.src = url;
@@ -172,7 +173,26 @@ export class ContentComponent implements OnInit {
 
   editContent(ContentId:number){
       this.router.navigate(['/home/' + this.id + '/' + ContentId + '/edit']);
+  }
 
+  compareDate(d1, d2) {
+    if( d1 && d2 ) {
+      return   ( d1.substring(0, 18) != d2.substring(0, 18));
+    }else {
+      return false;
+    }
+
+
+
+
+
+
+    // if( (d1.split('T').length = 2) & (d2.split('T').length = 2))
+    // {
+    //  return d1.split('T')[0] !=   d2.split('T')[0];
+    // }else{
+    //  return  d1 != d2 ;
+    // }
 
   }
 

@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NodeService} from "../../shared/NodeService";
 import {ChannelService} from "../../shared/channel.service";
 import {ToastrService} from "ngx-toastr";
-import {Content, StatusMenu} from "../../model/content";
+import {Content, StatusMenu, TagMenu} from "../../model/content";
 
 @Component({
   selector:'app-edit-content',
@@ -13,13 +13,11 @@ import {Content, StatusMenu} from "../../model/content";
 })
 
 export  class EditContentComponent implements OnInit {
-  // @ViewChild('myInputVariable')
-  // myInputVariable: any;
   user= {};
   content: Content;
   fileToUpload: File;
   audioFileToUpload: File;
-  priorityList: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 35];
+  priorityList: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
   locationsAsObjects= [];
   tagList: object[];
   statusList: object[];
@@ -98,18 +96,6 @@ this.route.params.subscribe(params => {
       }
     });
 
-
-
-    //
-    // // console.log(this.myInputVariable.nativeElement);
-    //  // this.myInputVariable.nativeElement.value = data.audioUrl;
-    //    // console.log(this.myInputVariable.nativeElement.files);
-    //  let f = new File([''], data['audioUrl']);
-    //  // let files = new FileList(f);
-    //
-    // // myfile.setName(data.audioUrl);
-    // this.myInputVariable.nativeElement.files[0] = f;
-
   });
 
 
@@ -124,13 +110,29 @@ OnSubmit( userRegistrationForm: any) {
   this.content['audioUrl'] = (this.audioContent.audioUrl);
   this.content['imageUrl'] = (this.imageprogress.imageUrl);
   this.content['tags']    =  (this.selectedItems);
-  console.log( this.content);
-  this.toast = this.toastr.success('Edited successfully !');
-  // this.contentService.addContent(this.content).subscribe(data => {
-  //   this.toast = this.toastr.success('Edited successfully !');
-  //   setTimeout(() => {  this.router.navigate(['/home/' + this.content['channel']['channelId'] + '/content']); }, 1000);
-  //
-  // });
+  // console.log( this.content);
+
+
+
+  for (var i in this.content['tags']) {
+
+    // delete  this.content['tags'][i].description;
+    // delete  this.content['tags'][i].dateAdded;
+    // delete  this.content['tags'][i].dateModified;
+
+
+    this.content['tags'][i] = <TagMenu>{ tagId: this.content['tags'][i]['tagId'], tagName: this.content['tags'][i]['tagName']};
+
+
+  }
+
+
+
+  this.contentService.updateContent(this.content).subscribe(data => {
+    this.toast = this.toastr.success('Edited successfully !');
+    setTimeout(() => {  this.router.navigate(['/home/' + this.content['channel']['channelId'] + '/content']); }, 1000);
+
+  });
 }
 
 onCancel(userRegistrationForm:any) {

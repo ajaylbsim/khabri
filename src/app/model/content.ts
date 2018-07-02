@@ -14,7 +14,7 @@ export class Content {
   channel: object;
   private audioDuration: string;
   private isSponsored: boolean;
-  private tags: Array<TagMenu>;
+   tags: Array<TagMenu>;
 
   public setTags(tags: Array<TagMenu>) {
     this.tags = tags;

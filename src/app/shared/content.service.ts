@@ -69,6 +69,13 @@ export class ContentService {
       });
   }
 
+  public updateContent(content: any) {
+    return this.http.post(Constants.SERVER_URL + '/contentService/v2/content/update', content)
+      .map(res => {
+        return res;
+      });
+  }
+
   public findAllStatus(userId: number, channelId: number) {
     return this.http.get(Constants.SERVER_URL + '/userService/v2/user/' +userId+'/channel/' +channelId +'/getAllowedStatus')
       .map(res => {

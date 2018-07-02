@@ -130,7 +130,7 @@
 
                   <span class="clour_darkgray justify  " style="font-size: 0.75em; margin-left: 1%">Added On :: {{content.dateAdded |date : format : shortDate}}</span>
 
-                  <span class="clour_darkgray justify " *ngIf="content.dateAdded != content.dateModified"  style="font-size: 0.75em; margin-left: 2%" >Modified On :: {{content.dateModified |date : format : shortDate}}</span>
+                  <span class="clour_darkgray justify " *ngIf="compareDate(content.dateAdded, content.dateModified)"  style="font-size: 0.75em; margin-left: 2%" >Modified On :: {{content.dateModified |date : format : shortDate}}</span>
 
                   </div>
 

@@ -149,12 +149,12 @@
 
                 <span class="clour_darkgray justify  " style="font-size: 0.75em; margin-left: 1%">Added On :: {{content.dateAdded |date : format : shortDate}}</span>
 
-                <span class="clour_darkgray justify " *ngIf="content.dateAdded != content.dateModified" style="font-size: 0.75em; margin-left: 25%" >Modified On :: {{content.dateModified |date : format : shortDate}}</span>
+                <span class="clour_darkgray justify " *ngIf=" compareDate(content.dateAdded, content.dateModified)" style="font-size: 0.75em; margin-left: 25%" >Modified On :: {{content.dateModified |date : format : shortDate}}</span>
 
               </div>
 
             <div class="card-action ">
-                <span class="pointer" (click)="play(editContent.audioUrl,content.contentId)" >
+                <span class="pointer" (click)="play(content.audioUrl,content.contentId)" >
                   <mat-icon class=" small material-icons pointer"  *ngIf="content.audioUrl && currntPlayerId !=content.contentId" > play_circle_outline</mat-icon>
 
                   <mat-icon class=" small material-icons pointer" *ngIf="!audio.paused && currntPlayerId ==content.contentId" > pause_circle_outline</mat-icon>

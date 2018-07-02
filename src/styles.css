@@ -180,6 +180,15 @@ div.error-message i{
   height: 10rem;
   background-color: transparent;
 }
+
+/*.mat-drawer-container {*/
+  /*position: relative;*/
+  /*z-index: 1;*/
+  /*box-sizing: border-box;*/
+  /*-webkit-overflow-scrolling: touch;*/
+  /*display: block;*/
+  /*overflow: visible !important;*/
+/*}*/
 /*.khabri_file_btn{*/
   /*width: 200px;*/
   /*height: 28px;*/
