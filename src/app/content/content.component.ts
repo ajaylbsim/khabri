@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ContentService} from '../shared/content.service';
 import {NodeService} from '../shared/NodeService';
@@ -9,7 +9,7 @@ import {ChannelService} from '../shared/channel.service';
   templateUrl:  './content.component.html',
   styleUrls:  ['./content.component.css']
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent implements OnInit, OnDestroy{
   statusList = [
       // {'statusId': 1,'statusName': 'ACTIVE','dateAdded': '2017-10-29T18: 58: 27','dateModified': '2017-10-29T18: 58: 27'},
       // {'statusId': 2,'statusName': 'IN-ACTIVE','dateAdded': '2017-10-29T18: 58: 27','dateModified': '2017-10-29T18: 58: 27'},
@@ -108,6 +108,13 @@ export class ContentComponent implements OnInit {
 
 
 
+  }
+
+
+  ngOnDestroy() {
+    if (this.audio) {
+      this.audio.pause();
+    }
   }
 
 
