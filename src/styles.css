@@ -52,7 +52,7 @@ div.error-message i{
 
 
 .circular-btn{
-  border-radius: 39px;
+  border-radius: 47px;
   width: 100%;
   background-color: #84bf40;
 }
@@ -169,8 +169,12 @@ div.error-message i{
 
 .khabri_tab_admin{
  color: white;
-  font-size: 1.5em;
   padding: 15px!important;
+  /*font-size: 1.5em;*/
+  /*padding: 15px!important;*/
+  /*padding: 20%!important;*/
+
+
 
 }
 
