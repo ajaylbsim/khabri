@@ -140,16 +140,17 @@
 
               <p> {{content.title | limitTo:50}}</p>
 
-                  <img    width="200px" height="150px" src="{{content.imageUrl}}">
+                  <img    width="auto" height="150px" class="container-img" src="{{content.imageUrl}}">
 
 
               </div>
 
-              <div  >
+              <div style="position: relative"  >
 
-                <span class="clour_darkgray justify  " style="font-size: 0.75em; margin-left: 1%">Added On :: {{content.dateAdded |date : format : shortDate}}</span>
+                <span class="clour_darkgray justify  " style="font-size: 0.75em;     position: absolute;left: 14px; bottom: 5px;" >Added On :: {{content.dateAdded |date : format : shortDate}}</span>
 
-                <span class="clour_darkgray justify " *ngIf=" compareDate(content.dateAdded, content.dateModified)" style="font-size: 0.75em; margin-left: 25%" >Modified On :: {{content.dateModified |date : format : shortDate}}</span>
+                <span class="clour_darkgray justify "
+                      *ngIf=" compareDate(content.dateAdded, content.dateModified)" style="font-size: 0.75em;    position: absolute; right: 14px; bottom: 5px;" >Modified On :: {{content.dateModified |date : format : shortDate}}</span>
 
               </div>
 

@@ -185,14 +185,14 @@ div.error-message i{
   background-color: transparent;
 }
 
-/*.mat-drawer-container {*/
+.mat-drawer-container {
   /*position: relative;*/
   /*z-index: 1;*/
   /*box-sizing: border-box;*/
   /*-webkit-overflow-scrolling: touch;*/
   /*display: block;*/
-  /*overflow: visible !important;*/
-/*}*/
+  overflow: visible !important;
+}
 /*.khabri_file_btn{*/
   /*width: 200px;*/
   /*height: 28px;*/
@@ -200,7 +200,27 @@ div.error-message i{
   /*left: -2px !important;*/
 /*}*/
 
+ .mat-drawer-content {
+  overflow: visible!important;
+}
 
+ .container-img{
+   max-width: 200px;
+
+ }
+
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+  .container-img{
+    max-width: 190px;
+
+  }
+}
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape) {
+  .container-img{
+    max-width: 200px;
+
+  }
+}
 
 
 
