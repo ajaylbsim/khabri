@@ -9,12 +9,14 @@
 </div>
 
 
-<mat-drawer-container class="container"  >
-
+<!--<mat-drawer-container class="container"  >-->
+<div class="row " >
+<div class="col s12">
 
   <!--admin view start-->
 
-  <div class="row "  *ngIf="user.isAdmin">
+
+  <div class="row admin_container-margin "  *ngIf="user.isAdmin">
     <div class="col s12">
       <div class="row" >
         <div class="col s3">
@@ -60,7 +62,7 @@
 
   <!--search  view-->
 
-  <div class="row " >
+  <div class="row  " >
 
     <div class="col s12">
 
@@ -108,7 +110,7 @@
 
 
 
-  <div class="row " >
+  <div class="row container-margin" >
 
               <div class="col s4"  *ngFor="let content of channels | filter : searchText:'title' :'channelId'">
 
@@ -171,6 +173,6 @@
 
 
 
-
-
-</mat-drawer-container>
+</div>
+</div>
+<!--</mat-drawer-container>-->
